@@ -16,7 +16,7 @@ export class AccessService {
 
   signIn(objeto: SignIn) {
     return this.http.post<ResponseAccess>(this.baseUrl + 'auth/signin', {
-      username: objeto.username,
+      email: objeto.email,
       password: objeto.password
     });
   }
