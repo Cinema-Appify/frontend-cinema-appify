@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { heroEyeSlashSolid, heroEyeSolid } from '@ng-icons/heroicons/solid';
 
 @Component({
   selector: 'app-general-input',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, NgIconComponent],
+  viewProviders: [provideIcons({ heroEyeSolid, heroEyeSlashSolid })],
   templateUrl: './general-input.component.html',
   styleUrls: ['./general-input.component.css'],
   providers: [
@@ -23,7 +26,8 @@ export class GeneralInputComponent implements ControlValueAccessor {
   @Input() autocomplete: string = '';
   @Input() required: boolean = false;
   @Input() placeholder: string = '';
-  @Input() icon?: any;
+  @Input() icon: string = '';
+  isPasswordInput: boolean = false;
 
   private internalValue: any = '';
 
@@ -62,5 +66,15 @@ export class GeneralInputComponent implements ControlValueAccessor {
 
   onBlur(): void {
     this.onTouched();
+  }
+
+  togglePasswordVisibility(): void {
+    if (this.type === 'password') {
+      this.type = 'text';
+      this.isPasswordInput = true;
+    } else {
+      this.type = 'password';
+      this.isPasswordInput = false;
+    }
   }
 }

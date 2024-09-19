@@ -6,17 +6,16 @@
         <form class="space-y-3 flex flex-col items-center justify-center" [formGroup]="formSignIn">
             <div>
                 <div class="mt-2 w-96">
-                    <app-general-input id="username" name="username" type="text" autocomplete="username"
-                        [required]="true" formControlName="username" placeholder="Username">
-                        <ng-icon name="heroUserSolid" icon></ng-icon>
-                    </app-general-input>
+                    <app-general-input id="email" name="email" type="email" autocomplete="email" [required]="true"
+                        formControlName="email" placeholder="Correo electrónico" icon="heroUserSolid" />
                 </div>
             </div>
 
             <div>
                 <div class="mt-2 w-96">
                     <app-general-input id="password" name="password" type="password" autocomplete="password"
-                        [required]="true" formControlName="password" placeholder="Contraseña"></app-general-input>
+                        [required]="true" formControlName="password" placeholder="Contraseña"
+                        icon="heroLockClosedSolid" />
                 </div>
                 <a [routerLink]="['/forgot-password']" class="flex justify-center font-bold text-white mt-2 w-full">
                     ¿Olvidaste tu contraseña?

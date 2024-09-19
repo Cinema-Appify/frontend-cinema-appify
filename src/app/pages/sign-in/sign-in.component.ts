@@ -5,18 +5,17 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { SignIn } from '../../Interfaces/SignIn';
 import { GeneralInputComponent } from '../../components/general-input/general-input.component';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { heroUserSolid } from '@ng-icons/heroicons/solid';
 import { GeneralButtonComponent } from '../../components/general-button/general-button.component';
 import { ToastrService } from 'ngx-toastr';
-import { TokenType } from '@angular/compiler';
+import { heroLockClosedSolid, heroUserSolid } from '@ng-icons/heroicons/solid';
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
   imports: [RouterLink, ReactiveFormsModule, GeneralInputComponent, NgIconComponent, GeneralButtonComponent],
-  viewProviders: [provideIcons({ heroUserSolid })],
+  viewProviders: [provideIcons({ heroUserSolid, heroLockClosedSolid })],
   templateUrl: './sign-in.component.html',
-  styleUrl: './sign-in.component.css'
+  styleUrl: './sign-in.component.css',
 })
 export class SignInComponent {
   private accessService = inject(AccessService);
@@ -24,7 +23,7 @@ export class SignInComponent {
   public formBuild = inject(FormBuilder);
 
   public formSignIn: FormGroup = this.formBuild.group({
-    username: ['', Validators.required],
+    email: ['', Validators.required],
     password: ['', Validators.required]
   });
 
@@ -33,7 +32,7 @@ export class SignInComponent {
   signIn() {
     if (this.formSignIn.valid) {
       const objeto: SignIn = {
-        username: this.formSignIn.value.username,
+        email: this.formSignIn.value.email,
         password: this.formSignIn.value.password
       }
 
@@ -47,7 +46,6 @@ export class SignInComponent {
           localStorage.setItem('usuario',
             JSON.stringify({
               id: response.id,
-              username: response.username,
               email: response.email,
               roles: response.roles,
               tokenType: response.tokenType,
@@ -68,8 +66,6 @@ export class SignInComponent {
         timeOut: 2000,
       });
     };
-
-
   }
 
   redirectSignUp() {
