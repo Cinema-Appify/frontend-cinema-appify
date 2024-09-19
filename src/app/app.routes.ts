@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { SignUpUserComponent } from './pages/sign-up-user/sign-up-user.component';
 
 export const routes: Routes = [
     {
@@ -15,9 +15,9 @@ export const routes: Routes = [
         component: ForgotPasswordComponent,
     },
     {
-        path: 'sign-up',
+        path: 'sign-up-user',
         title: 'Sign Up',
-        component: SignUpComponent,
+        component: SignUpUserComponent,
     }
     // { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];
