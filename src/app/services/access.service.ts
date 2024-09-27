@@ -5,6 +5,7 @@ import { ResponseAccess } from '../Interfaces/ResponseAccess';
 import { SignIn } from '../Interfaces/SignIn';
 import { SignUpUser } from '../Interfaces/SignUpUser';
 import { SignUpCinema } from '../Interfaces/SignUpCinema';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,13 +34,8 @@ export class AccessService {
     });
   }
 
-  signUpCinema(objeto: SignUpCinema){
-    return this.http.post<ResponseAccess>(this.baseUrl + 'auth/signUpCinema', {
-      email: objeto.email,
-      name: objeto.name,
-      password: objeto.password,
-      photo: objeto.photo
-    });
+  signUpCinema(formData: FormData): Observable<ResponseAccess> {
+    return this.http.post<ResponseAccess>(`${this.baseUrl}auth/signUpCinema`, formData);
   }
 
 }
