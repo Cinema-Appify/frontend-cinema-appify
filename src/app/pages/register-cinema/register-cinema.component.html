@@ -1,0 +1,64 @@
+<div class="flex flex-col h-screen bg-gray-100">
+  <div class="bg-custom-dark-blue flex items-center justify-center p-4">
+    <div class="flex space-x-8">
+      <a href="#" class="text-white">Usuarios</a>
+      <a href="#" class="text-white border-b-2 border-strong-red">Cines</a>
+    </div>
+  </div>
+
+  <div class="flex flex-col items-center justify-center h-full bg-white relative">
+    <div class="flex space-x-8 absolute top-12">
+      <a href="#" class="text-black border-b-2 border-strong-red">Registrar</a>
+      <a href="#" class="text-gray-500">Registrados</a>
+    </div>
+
+    <div class="bg-gray-50 p-8 rounded-lg shadow-md w-2/5 mt-10">
+      <div class="flex items-center justify-center mb-6">
+        <img 
+          src="img/MiniLogo.png" 
+          alt="Upload Icon" 
+          class="w-12 h-12 mr-4 object-cover rounded-full"
+        />
+        <label for="photo" class="w-80 h-20 bg-transparent text-gray-500 rounded-lg p-4 border-dashed border-2 border-gray-400 flex justify-center items-center cursor-pointer">
+          <span>Arrastre o seleccione su imagen</span>
+          <input id="photo" type="file" accept="image/*" (change)="onImageSelected($event)" class="hidden" />
+        </label>
+      </div>
+
+      <form class="space-y-4" [formGroup]="formSignUpCinema">
+        <div class="grid grid-cols-2 gap-4">
+          <input id="email" name="email" type="email" autocomplete="email" class="border border-gray-300 rounded-lg p-3 w-full" placeholder="Correo electrónico" required />
+          <input id="name" name="name" type="text" autocomplete="name" class="border border-gray-300 rounded-lg p-3 w-full" placeholder="Nombre" required />
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <input id="password" name="password" type="password" autocomplete="new-password" class="border border-gray-300 rounded-lg p-3 w-full" placeholder="Contraseña" required />
+          <input id="repeatPassword" name="repeatPassword" type="password" autocomplete="new-password" class="border border-gray-300 rounded-lg p-3 w-full" placeholder="Repetir contraseña" required />
+        </div>
+
+        <div class="flex justify-center">
+          <button class="bg-strong-red text-white py-2 px-6 rounded-lg hover:bg-light-red">Registrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Colors -->
+<style>
+  .bg-custom-dark-blue {
+    background-color: #273238; 
+  }
+  .bg-strong-red {
+    background-color: #E53E3E; 
+  }
+  .hover\:bg-light-red:hover {
+    background-color: #F56565; 
+  }
+  .text-gray-500 {
+    color: #A0AEC0; 
+  }
+  .border-strong-red {
+    border-color: #E53E3E; 
+  }
+</style>
