@@ -1,64 +1,88 @@
-<div class="flex flex-col h-screen bg-gray-100">
-  <div class="bg-custom-dark-blue flex items-center justify-center p-4">
-    <div class="flex space-x-8">
-      <a href="#" class="text-white">Usuarios</a>
-      <a href="#" class="text-white border-b-2 border-strong-red">Cines</a>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<div class="bg-grayish-blue text-white p-4 flex justify-between items-center">
+    <div class="flex space-x-4 mx-auto">
+        <a href="#" class="hover:underline">Usuarios</a>
+        <a href="#" class="hover:underline border-b-2 border-white">Cines</a>
     </div>
-  </div>
-
-  <div class="flex flex-col items-center justify-center h-full bg-white relative">
-    <div class="flex space-x-8 absolute top-12">
-      <a href="#" class="text-black border-b-2 border-strong-red">Registrar</a>
-      <a href="#" class="text-gray-500">Registrados</a>
+    <div>LOREM IPSUM</div>
+</div>
+<div class="container mx-auto mt-36">
+    <div class="bg-grayish-blue text-white p-3 rounded-lg flex justify-between items-center mb-4">
+        <h2 class="text-xl mx-auto">Cines</h2>
+        <button class="bg-yellow-500 text-white px-4 py-1 rounded flex items-center" onclick="addCinema()" title="Añadir un nuevo cine">
+            Añadir <i class="fas fa-plus ml-2"></i>
+        </button>
     </div>
-
-    <div class="bg-gray-50 p-8 rounded-lg shadow-md w-2/5 mt-10">
-      <div class="flex items-center justify-center mb-6">
-        <img 
-          src="img/MiniLogo.png" 
-          alt="Upload Icon" 
-          class="w-12 h-12 mr-4 object-cover rounded-full"
-        />
-        <label for="photo" class="w-80 h-20 bg-transparent text-gray-500 rounded-lg p-4 border-dashed border-2 border-gray-400 flex justify-center items-center cursor-pointer">
-          <span>Arrastre o seleccione su imagen</span>
-          <input id="photo" type="file" accept="image/*" (change)="onImageSelected($event)" class="hidden" />
-        </label>
-      </div>
-
-      <form class="space-y-4" [formGroup]="formSignUpCinema">
-        <div class="grid grid-cols-2 gap-4">
-          <input id="email" name="email" type="email" autocomplete="email" class="border border-gray-300 rounded-lg p-3 w-full" placeholder="Correo electrónico" required />
-          <input id="name" name="name" type="text" autocomplete="name" class="border border-gray-300 rounded-lg p-3 w-full" placeholder="Nombre" required />
+    <div class="rounded-lg shadow-lg p-4" style="background-color: transparent;">
+        <div class="grid grid-cols-5 gap-4 p-4 rounded-lg">
+            <div class="text-center bg-grayish-blue text-white p-2 rounded-lg">Id</div>
+            <div class="text-center bg-grayish-blue text-white p-2 rounded-lg">Nombre</div>
+            <div class="text-center bg-grayish-blue text-white p-2 rounded-lg">Ubicación</div>
+            <div class="text-center bg-grayish-blue text-white p-2 rounded-lg">Estado</div>
+            <div class="text-center bg-grayish-blue text-white p-2 rounded-lg">Acción</div>
         </div>
-
-        <div class="grid grid-cols-2 gap-4">
-          <input id="password" name="password" type="password" autocomplete="new-password" class="border border-gray-300 rounded-lg p-3 w-full" placeholder="Contraseña" required />
-          <input id="repeatPassword" name="repeatPassword" type="password" autocomplete="new-password" class="border border-gray-300 rounded-lg p-3 w-full" placeholder="Repetir contraseña" required />
+        <div class="grid grid-cols-5 gap-4 border-b p-4">
+            <div class="text-center bg-gray-100 p-2 rounded-lg">1</div>
+            <div class="text-center bg-gray-100 p-2 rounded-lg">Cinepolis</div>
+            <div class="text-center bg-gray-100 p-2 rounded-lg">Cartago, Costa Rica</div>
+            <div class="text-center bg-gray-100 p-2 rounded-lg">En espera</div>
+            <div class="text-center bg-gray-100 p-2 rounded-lg flex justify-center space-x-2">
+                <button class="bg-yellow-500 text-white px-2 py-1 rounded-lg" onclick="editCinema(1)" title="Editar cine"><i class="fas fa-edit"></i></button>
+                <button class="bg-red-500 text-white px-2 py-1 rounded-lg" onclick="deleteCinema(1)" title="Eliminar cine"><i class="fas fa-trash"></i></button>
+            </div>
         </div>
-
-        <div class="flex justify-center">
-          <button class="bg-strong-red text-white py-2 px-6 rounded-lg hover:bg-light-red">Registrar</button>
+        <div class="grid grid-cols-5 gap-4 border-b p-4">
+            <div class="text-center bg-gray-100 p-2 rounded-lg">2</div>
+            <div class="text-center bg-gray-100 p-2 rounded-lg">TerraCine</div>
+            <div class="text-center bg-gray-100 p-2 rounded-lg">San Pedro, Costa Rica</div>
+            <div class="text-center bg-gray-100 p-2 rounded-lg">Aprobado</div>
+            <div class="text-center bg-gray-100 p-2 rounded-lg flex justify-center space-x-2">
+                <button class="bg-yellow-500 text-black px-2 py-1 rounded-lg" onclick="editCinema(2)" title="Editar cine"><i class="fas fa-edit"></i></button>
+                <button class="bg-red-500 text-white px-2 py-1 rounded-lg" onclick="deleteCinema(2)" title="Eliminar cine"><i class="fas fa-trash"></i></button>
+            </div>
         </div>
-      </form>
+        <div class="grid grid-cols-5 gap-4 border-b p-4">
+            <div class="text-center bg-gray-100 p-2 rounded-lg">3</div>
+            <div class="text-center bg-gray-100 p-2 rounded-lg">BelenCinemas</div>
+            <div class="text-center bg-gray-100 p-2 rounded-lg">Heredia, Costa Rica</div>
+            <div class="text-center bg-gray-100 p-2 rounded-lg">En espera</div>
+            <div class="text-center bg-gray-100 p-2 rounded-lg flex justify-center space-x-2">
+                <button class="bg-yellow-500 text-black px-2 py-1 rounded-lg" onclick="editCinema(3)" title="Editar cine"><i class="fas fa-edit"></i></button>
+                <button class="bg-red-500 text-white px-2 py-1 rounded-lg" onclick="deleteCinema(3)" title="Eliminar cine"><i class="fas fa-trash"></i></button>
+            </div>
+        </div>
+        <div class="grid grid-cols-5 gap-4 p-4">
+            <div class="text-center bg-gray-100 p-2 rounded-lg">4</div>
+            <div class="text-center bg-gray-100 p-2 rounded-lg">CenX</div>
+            <div class="text-center bg-gray-100 p-2 rounded-lg">Cartago, Costa Rica</div>
+            <div class="text-center bg-gray-100 p-2 rounded-lg">En espera</div>
+            <div class="text-center bg-gray-100 p-2 rounded-lg flex justify-center space-x-2">
+                <button class="bg-yellow-500 text-black px-2 py-1 rounded-lg" onclick="editCinema(4)" title="Editar cine"><i class="fas fa-edit"></i></button>
+                <button class="bg-red-500 text-white px-2 py-1 rounded-lg" onclick="deleteCinema(4)" title="Eliminar cine"><i class="fas fa-trash"></i></button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
-<!-- Colors -->
-<style>
-  .bg-custom-dark-blue {
-    background-color: #273238; 
-  }
-  .bg-strong-red {
-    background-color: #E53E3E; 
-  }
-  .hover\:bg-light-red:hover {
-    background-color: #F56565; 
-  }
-  .text-gray-500 {
-    color: #A0AEC0; 
-  }
-  .border-strong-red {
-    border-color: #E53E3E; 
-  }
-</style>
+<script>
+    // Función para agregar un nuevo cine
+    function addCinema() {
+        alert("Función para añadir un nuevo cine");
+        // Aquí puedes implementar la lógica para agregar un nuevo cine, como abrir un formulario.
+    }
+
+    // Función para editar un cine
+    function editCinema(id) {
+        alert("Editando el cine con id: " + id);
+        // Aquí puedes implementar la lógica para editar el cine, como abrir un formulario de edición.
+    }
+
+    // Función para eliminar un cine
+    function deleteCinema(id) {
+        if (confirm("¿Estás seguro de que deseas eliminar el cine con id: " + id + "?")) {
+            alert("Cine con id " + id + " eliminado.");
+            // Aquí puedes implementar la lógica para eliminar el cine.
+        }
+    }
+</script>

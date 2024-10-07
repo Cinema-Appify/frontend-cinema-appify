@@ -31,5 +31,6 @@ export const routes: Routes = [
         title: 'Register Cinema',
         component: RegisterCinemaComponent,
     }
+   
     // { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];
