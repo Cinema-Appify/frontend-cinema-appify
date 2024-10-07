@@ -28,14 +28,21 @@ export class AccessService {
     return this.http.post<ResponseAccess>(this.baseUrl + 'auth/signup', {
       email: objeto.email,
       name: objeto.name,
-      lastname1: objeto.lastname1,
-      lastname2: objeto.lastname2,
+      firstName: objeto.firstName,
+      lastName: objeto.lastName,
       password: objeto.password
     });
   }
 
   signUpCinema(formData: FormData): Observable<ResponseAccess> {
-    return this.http.post<ResponseAccess>(`${this.baseUrl}auth/signUpCinema`, formData);
+    return this.http.post<ResponseAccess>(this.baseUrl + 'auth/signUpCinema', formData);
   }
+
+  uploadImage(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('multipartFile', file);
+    return this.http.post(this.baseUrl + 'auth/uploadImage', formData);
+  }
+  
 
 }

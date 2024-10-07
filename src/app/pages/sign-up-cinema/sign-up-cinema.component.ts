@@ -83,27 +83,49 @@ export class SignUpCinemaComponent {
         console.log('Archivo de imagen agregado a FormData:', this.selectedFile.name);
       }
 
-      console.log('Datos del formulario a enviar:', {
-        email: this.formSignUpCinema.value.email,
-        name: this.formSignUpCinema.value.name,
-        password: this.formSignUpCinema.value.password,
-        photo: this.selectedFile ? this.selectedFile.name : 'No hay archivo seleccionado'
-      });
 
-      this.accessService.signUpCinema(formData).subscribe({
-        next: (response: ResponseAccess) => {
-          console.log('Respuesta del servidor:', response);
-          this.toastr.success('Cine registrado exitosamente. Redirigiendo...');
-          setTimeout(() => this.router.navigate(['']), 2000);
-        },
-        error: (error) => {
-          console.error('Error al registrar el cine:', error);
-          this.toastr.error('Error al registrar el cine. Inténtalo de nuevo.');
-        }
-      });
+      if(this.selectedFile){
+        this.accessService.uploadImage(this.selectedFile).subscribe({
+          next: (uploadResponse) => {
+            console.log('Imagen subida correctamente:', uploadResponse);
+
+            formData.append('photo', uploadResponse);
+
+            this.accessService.signUpCinema(formData).subscribe({
+              next: (response: ResponseAccess) => {
+                console.log('Cine registrado exitosamente:', response);
+                this.toastr.success('Cine registrado exitosamente. Redirigiendo...');
+                setTimeout(() => this.router.navigate(['']), 2000);
+              },
+              error: (error) => {
+                console.error('Error al registrar el cine:', error);
+                this.toastr.error('Error al registrar el cine. Inténtalo de nuevo.');
+              }
+            });
+          },
+          error: (error) => {
+            console.error('Error al subir la imagen:', error);
+            this.toastr.error('Error al subir la imagen. Inténtalo de nuevo.');
+          }
+        });
+      } else {
+        // Si no hay imagen, solo registra el cine
+        this.accessService.signUpCinema(formData).subscribe({
+          next: (response: ResponseAccess) => {
+            console.log('Cine registrado exitosamente:', response);
+            this.toastr.success('Cine registrado exitosamente. Redirigiendo...');
+            setTimeout(() => this.router.navigate(['']), 2000);
+          },
+          error: (error) => {
+            console.error('Error al registrar el cine:', error);
+            this.toastr.error('Error al registrar el cine. Inténtalo de nuevo.');
+          }
+        });
+      }
     } else {
       this.toastr.error('Por favor, completa el formulario correctamente.');
       console.log('Formulario inválido. Errores:', this.formSignUpCinema.errors);
     }
   }
 }
+   
