@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AccessService {
- 
+
   private http = inject(HttpClient);
   private baseUrl: string = appsSettings.apiUrl;
 
@@ -34,8 +34,13 @@ export class AccessService {
     });
   }
 
-  signUpCinema(formData: FormData): Observable<ResponseAccess> {
-    return this.http.post<ResponseAccess>(this.baseUrl + 'auth/signUpCinema', formData);
+  signUpCinema(objeto: SignUpCinema) {
+    return this.http.post<ResponseAccess>(`${this.baseUrl}auth/signUpCinema`, {
+      email: objeto.email,
+      name: objeto.name,
+      photo: objeto.photo,
+      password: objeto.password
+    });
   }
 
   uploadImage(file: File): Observable<any> {
@@ -43,6 +48,4 @@ export class AccessService {
     formData.append('multipartFile', file);
     return this.http.post(this.baseUrl + 'auth/uploadImage', formData);
   }
-  
-
 }
