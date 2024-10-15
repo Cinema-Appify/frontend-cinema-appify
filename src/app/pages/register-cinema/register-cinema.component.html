@@ -1,88 +1,72 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-<div class="bg-grayish-blue text-white p-4 flex justify-between items-center">
-    <div class="flex space-x-4 mx-auto">
-        <a href="#" class="hover:underline">Usuarios</a>
-        <a href="#" class="hover:underline border-b-2 border-white">Cines</a>
-    </div>
-    <div>LOREM IPSUM</div>
-</div>
 <div class="container mx-auto mt-36">
-    <div class="bg-grayish-blue text-white p-3 rounded-lg flex justify-between items-center mb-4">
-        <h2 class="text-xl mx-auto">Cines</h2>
-        <button class="bg-yellow-500 text-white px-4 py-1 rounded flex items-center" onclick="addCinema()" title="Añadir un nuevo cine">
-            Añadir <i class="fas fa-plus ml-2"></i>
+    <h2 class="text-xl text-center mb-4">Listado de Cines</h2>
+
+    <app-general-table [columns]="['Id', 'Nombre', 'Ubicación', 'Estado', 'Rol']" [data]="cinemas"
+        [editAction]="editCinema" [deleteAction]="deleteCinema"></app-general-table>
+
+
+    <div class="flex justify-center mt-6">
+        <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg" (click)="openModal()">
+            Añadir Cine <i class="fas fa-plus ml-2"></i>
         </button>
     </div>
-    <div class="rounded-lg shadow-lg p-4" style="background-color: transparent;">
-        <div class="grid grid-cols-5 gap-4 p-4 rounded-lg">
-            <div class="text-center bg-grayish-blue text-white p-2 rounded-lg">Id</div>
-            <div class="text-center bg-grayish-blue text-white p-2 rounded-lg">Nombre</div>
-            <div class="text-center bg-grayish-blue text-white p-2 rounded-lg">Ubicación</div>
-            <div class="text-center bg-grayish-blue text-white p-2 rounded-lg">Estado</div>
-            <div class="text-center bg-grayish-blue text-white p-2 rounded-lg">Acción</div>
-        </div>
-        <div class="grid grid-cols-5 gap-4 border-b p-4">
-            <div class="text-center bg-gray-100 p-2 rounded-lg">1</div>
-            <div class="text-center bg-gray-100 p-2 rounded-lg">Cinepolis</div>
-            <div class="text-center bg-gray-100 p-2 rounded-lg">Cartago, Costa Rica</div>
-            <div class="text-center bg-gray-100 p-2 rounded-lg">En espera</div>
-            <div class="text-center bg-gray-100 p-2 rounded-lg flex justify-center space-x-2">
-                <button class="bg-yellow-500 text-white px-2 py-1 rounded-lg" onclick="editCinema(1)" title="Editar cine"><i class="fas fa-edit"></i></button>
-                <button class="bg-red-500 text-white px-2 py-1 rounded-lg" onclick="deleteCinema(1)" title="Eliminar cine"><i class="fas fa-trash"></i></button>
-            </div>
-        </div>
-        <div class="grid grid-cols-5 gap-4 border-b p-4">
-            <div class="text-center bg-gray-100 p-2 rounded-lg">2</div>
-            <div class="text-center bg-gray-100 p-2 rounded-lg">TerraCine</div>
-            <div class="text-center bg-gray-100 p-2 rounded-lg">San Pedro, Costa Rica</div>
-            <div class="text-center bg-gray-100 p-2 rounded-lg">Aprobado</div>
-            <div class="text-center bg-gray-100 p-2 rounded-lg flex justify-center space-x-2">
-                <button class="bg-yellow-500 text-black px-2 py-1 rounded-lg" onclick="editCinema(2)" title="Editar cine"><i class="fas fa-edit"></i></button>
-                <button class="bg-red-500 text-white px-2 py-1 rounded-lg" onclick="deleteCinema(2)" title="Eliminar cine"><i class="fas fa-trash"></i></button>
-            </div>
-        </div>
-        <div class="grid grid-cols-5 gap-4 border-b p-4">
-            <div class="text-center bg-gray-100 p-2 rounded-lg">3</div>
-            <div class="text-center bg-gray-100 p-2 rounded-lg">BelenCinemas</div>
-            <div class="text-center bg-gray-100 p-2 rounded-lg">Heredia, Costa Rica</div>
-            <div class="text-center bg-gray-100 p-2 rounded-lg">En espera</div>
-            <div class="text-center bg-gray-100 p-2 rounded-lg flex justify-center space-x-2">
-                <button class="bg-yellow-500 text-black px-2 py-1 rounded-lg" onclick="editCinema(3)" title="Editar cine"><i class="fas fa-edit"></i></button>
-                <button class="bg-red-500 text-white px-2 py-1 rounded-lg" onclick="deleteCinema(3)" title="Eliminar cine"><i class="fas fa-trash"></i></button>
-            </div>
-        </div>
-        <div class="grid grid-cols-5 gap-4 p-4">
-            <div class="text-center bg-gray-100 p-2 rounded-lg">4</div>
-            <div class="text-center bg-gray-100 p-2 rounded-lg">CenX</div>
-            <div class="text-center bg-gray-100 p-2 rounded-lg">Cartago, Costa Rica</div>
-            <div class="text-center bg-gray-100 p-2 rounded-lg">En espera</div>
-            <div class="text-center bg-gray-100 p-2 rounded-lg flex justify-center space-x-2">
-                <button class="bg-yellow-500 text-black px-2 py-1 rounded-lg" onclick="editCinema(4)" title="Editar cine"><i class="fas fa-edit"></i></button>
-                <button class="bg-red-500 text-white px-2 py-1 rounded-lg" onclick="deleteCinema(4)" title="Eliminar cine"><i class="fas fa-trash"></i></button>
-            </div>
-        </div>
-    </div>
 </div>
 
-<script>
-    // Función para agregar un nuevo cine
-    function addCinema() {
-        alert("Función para añadir un nuevo cine");
-        // Aquí puedes implementar la lógica para agregar un nuevo cine, como abrir un formulario.
-    }
 
-    // Función para editar un cine
-    function editCinema(id) {
-        alert("Editando el cine con id: " + id);
-        // Aquí puedes implementar la lógica para editar el cine, como abrir un formulario de edición.
-    }
+<!-- MOdal emergente -->
+<div *ngIf="isModalOpen"
+    class="fixed inset-0 bg-white bg-opacity-25 flex items-center justify-center transition-opacity duration-300 ease-in-out"
+    [ngClass]="{'backdrop-blur-sm': isModalOpen}">
+    <div class="bg-grayish-blue py-20 px-20 rounded-lg shadow-lg relative w-[48rem] my-auto transition-transform transform scale-95"
+        *ngIf="isModalOpen" [ngClass]="{'scale-100': isModalOpen}">
+        <button (click)="closeModal()" class="absolute top-2 right-4 text-white text-xl">
+            <i class="fas fa-times"></i>
+        </button>
+        <form class="space-y-4">
+            <div class="flex flex-col items-center mb-6">
+                <div class="flex items-center">
+                    <img [src]="'img/MiniLogo.png'" alt="Upload Icon"
+                        class="w-12 h-12 mr-4 object-cover rounded-full" />
 
-    // Función para eliminar un cine
-    function deleteCinema(id) {
-        if (confirm("¿Estás seguro de que deseas eliminar el cine con id: " + id + "?")) {
-            alert("Cine con id " + id + " eliminado.");
-            // Aquí puedes implementar la lógica para eliminar el cine.
-        }
-    }
-</script>
+                    <label for="photo"
+                        class="w-80 bg-transparent text-white rounded-lg p-4 border-dashed border-2 border-white flex justify-center items-center cursor-pointer">
+                        Arrastre o seleccione su imagen
+                        <input id="photo" type="file" accept="image/*" class="hidden" />
+                    </label>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form class="space-y-3 flex flex-col items-center justify-center">
+                <div class="flex flex-row">
+                    <div class="mt-2 w-auto">
+                        <app-general-input id="email" name="email" type="email" autocomplete="email" [required]="true"
+                            formControlName="email" placeholder="Correo electrónico" />
+                    </div>
+                    <div class="mt-2 w-auto ml-2">
+                        <app-general-input id="name" name="name" type="name" autocomplete="name" [required]="true"
+                            formControlName="name" placeholder="Nombre" />
+                    </div>
+                </div>
+
+                <!-- Password Inputs -->
+                <div class="flex flex-row">
+                    <div class="w-auto">
+                        <app-general-input id="password" name="password" type="password" autocomplete="password"
+                            [required]="true" formControlName="password" placeholder="Contraseña" />
+                    </div>
+                    <div class="w-auto ml-2">
+                        <app-general-input id="repeatPassword" name="repeatPassword" type="password"
+                            autocomplete="repeatPassword" [required]="true" formControlName="repeatPassword"
+                            placeholder="Repetir Contraseña" />
+                    </div>
+                </div>
+                <div class="flex justify-center mt-8">
+                    <button type="submit" class="bg-red-600 text-white py-2 px-8 rounded-lg">Registrar</button>
+                </div>
+            </form>
+        </form>
+    </div>
+</div>

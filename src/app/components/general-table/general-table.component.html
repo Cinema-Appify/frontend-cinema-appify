@@ -1,0 +1,32 @@
+<div class="rounded-lg shadow-lg p-4" style="background-color: transparent;">
+  <table class="min-w-full bg-white border rounded-lg">
+    <!-- Encabezado de la tabla -->
+    <thead>
+      <tr class="bg-grayish-blue text-white">
+        <ng-container *ngFor="let col of columns">
+          <th class="p-2 text-center">{{ col }}</th>
+        </ng-container>
+        <th *ngIf="actions" class="p-2 text-center">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let item of data">
+        <tr class="border-b">
+          <ng-container *ngFor="let col of columns">
+            <td class="p-2 text-center bg-gray-100">{{ item[col.toLowerCase()] }}</td>
+          </ng-container>
+          <td *ngIf="actions" class="p-2 text-center bg-gray-100">
+            <div class="flex justify-center space-x-2">
+              <button class="bg-yellow-500 text-white px-2 py-1 rounded-lg" (click)="editAction(item.id)" title="Editar">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="bg-red-500 text-white px-2 py-1 rounded-lg" (click)="deleteAction(item.id)" title="Eliminar">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

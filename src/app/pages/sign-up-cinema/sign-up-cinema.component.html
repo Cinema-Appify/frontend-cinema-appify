@@ -1,5 +1,5 @@
 <div class="grid grid-cols-2 h-screen">
-  <!-- Left Side: Welcome Message and Image -->
+  <!-- Left Side -->
   <div class="h-full flex flex-col justify-center items-center bg-white">
     <h1 class="text-lg font-bold text-grayish-blue text-center">¡Bienvenido al sistema de gestión de salas de cine!</h1>
     <div class="mt-2">
@@ -10,9 +10,8 @@
     </p>
   </div>
 
-  <!-- Right Side: Sign Up Form -->
+  <!-- Right Side -->
   <div class="h-full bg-grayish-blue flex flex-col justify-center items-center">
-    <!-- Logo -->
     <div class="mb-8">
       <img class="mx-auto w-96" src="img/movie-theater-logo.png" alt="Movie Theater Management Logo">
     </div>
@@ -20,7 +19,6 @@
     <!-- File Upload for Image -->
     <div class="flex flex-col items-center mb-6">
       <div class="flex items-center">
-        <!-- Icon o Vista Previa de la Imagen -->
         <img 
           [src]="imagePreview ? imagePreview : 'img/MiniLogo.png'" 
           alt="Upload Icon" 
@@ -34,9 +32,8 @@
       </div>
     </div>
 
-    <!-- Form Fields -->
+    <!-- Form -->
     <form class="space-y-3 flex flex-col items-center justify-center" [formGroup]="formSignUpCinema">
-      <!-- Email and Name Inputs -->
       <div class="flex flex-row">
         <div class="mt-2 w-auto">
           <app-general-input id="email" name="email" type="email" autocomplete="email" [required]="true"
@@ -48,7 +45,7 @@
         </div>
       </div>
 
-      <!-- Password and Repeat Password Inputs -->
+      <!-- Password Inputs -->
       <div class="flex flex-row">
         <div class="w-auto">
           <app-general-input id="password" name="password" type="password" autocomplete="password" [required]="true"

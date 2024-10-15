@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<div class="container mx-auto mt-36">
+    <h2 class="text-xl text-center mb-4">Listado de Usuarios</h2>
+
+    <app-general-table [columns]="['Id','Correo', 'Nombre', 'Apellido', 'Apellido2', 'Rol']" [data]="cinemas"
+        [editAction]="editCinema" [deleteAction]="deleteCinema"></app-general-table>
+
+    <div class="flex justify-center mt-6">
+        <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg" (click)="openModal()">
+            Añadir Cine <i class="fas fa-plus ml-2"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Modal emergente -->
+<div *ngIf="isModalOpen"
+    class="fixed inset-0 bg-white bg-opacity-25 flex items-center justify-center transition-opacity duration-300 ease-in-out"
+    [ngClass]="{'backdrop-blur-sm': isModalOpen}">
+    <div class="bg-grayish-blue py-20 px-20 rounded-lg shadow-lg relative w-[48rem] my-auto transition-transform transform scale-95"
+        *ngIf="isModalOpen" [ngClass]="{'scale-100': isModalOpen}">
+        <button (click)="closeModal()" class="absolute top-2 right-4 text-white text-xl">
+            <i class="fas fa-times"></i>
+        </button>
+        <form class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+                <app-general-input [placeholder]="'Correo electrónico'" [type]="'email'" [id]="'email'"
+                    [name]="'email'"></app-general-input>
+                <app-general-input [placeholder]="'Nombre'" [type]="'text'" [id]="'nombre'"
+                    [name]="'nombre'"></app-general-input>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <app-general-input [placeholder]="'Apellido'" [type]="'text'" [id]="'apellido'"
+                    [name]="'apellido'"></app-general-input>
+                <app-general-input [placeholder]="'Apellido 2'" [type]="'text'" [id]="'apellido2'"
+                    [name]="'apellido2'"></app-general-input>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <app-general-input [placeholder]="'Contraseña'" [type]="'password'" [id]="'password'"
+                    [name]="'password'"></app-general-input>
+                <app-general-input [placeholder]="'Repetir contraseña'" [type]="'password'" [id]="'repeatPassword'"
+                    [name]="'repeatPassword'"></app-general-input>
+            </div>
+            <div class="flex justify-center mt-8">
+                <app-general-button [text]="'Registrar'" [color]="'bg-red-600'" [colorHover]="'hover:bg-red-700'"
+                    [width]="54" type="submit"></app-general-button>
+            </div>
+        </form>
+    </div>
+</div>
