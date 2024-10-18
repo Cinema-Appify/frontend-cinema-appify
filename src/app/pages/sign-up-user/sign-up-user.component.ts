@@ -35,8 +35,8 @@ export class SignUpUserComponent {
       const objeto: SignUpUser = {
         email: this.formSignUpUser.value.email,
         name: this.formSignUpUser.value.name,
-        lastname1: this.formSignUpUser.value.lastname1,
-        lastname2: this.formSignUpUser.value.lastname2?.trim() || '', // Ensure lastname2 is handled as optional
+        firstName: this.formSignUpUser.value.lastname1,
+        lastName: this.formSignUpUser.value.lastname2?.trim() || '', // Ensure lastname2 is handled as optional
         password: this.formSignUpUser.value.password,
         repeatPassword: this.formSignUpUser.value.repeatPassword
       }

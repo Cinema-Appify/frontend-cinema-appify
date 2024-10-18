@@ -1,20 +1,30 @@
-<div class="grid grid-cols-2 divide-x h-screen">
-    <div class="h-full flex flex-col justify-center">
-        <div class="flex flex-col items-center">
-            <h1 class="text-lg font-bold text-grayish-blue text-center">¡Bienvenido al sistema de gestión de salas de
-                cine!</h1>
-            <div class="mt-2">
-                <img src="img/sign-up-user-img.png" alt="Palomitas y distintos objetos de cine" class="w-96">
-            </div>
-            <p class="text-grayish-blue mt-2 text-center font-semibold">
-                Regístrate para disfrutar de nuestro servicio de<br /> gestión de salas de cine.
-            </p>
-        </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<div class="container mx-auto mt-36">
+
+    <div class="bg-grayish-blue text-white rounded-t-lg flex justify-between items-center px-6 py-3">
+
+        <h3 class="text-lg text-center flex-grow">Usuarios</h3>
+
+        <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 ml-auto" (click)="openModal()">
+            Añadir <i class="fas fa-plus ml-2"></i>
+        </button>
+
     </div>
-    <div class="h-full bg-grayish-blue flex flex-col justify-center">
-        <div>
-            <img class="mx-auto w-96" src="img/movie-theater-logo.png" alt="Movie Theather Management Logo">
-        </div>
+
+    <app-general-table [columns]="columnNames" [data]="users" [editAction]="editCinema" [deleteAction]="deleteCinema"
+        class="w-full table-auto bg-white shadow-lg rounded-b-lg"></app-general-table>
+</div>
+
+<!-- Modal emergente -->
+<div *ngIf="isModalOpen"
+    class="fixed inset-0 bg-white bg-opacity-25 flex items-center justify-center transition-opacity duration-300 ease-in-out"
+    [ngClass]="{'backdrop-blur-sm': isModalOpen}">
+    <div class="bg-grayish-blue py-20 px-20 rounded-lg shadow-lg relative w-[48rem] my-auto transition-transform transform scale-95"
+        *ngIf="isModalOpen" [ngClass]="{'scale-100': isModalOpen}">
+        <button (click)="closeModal()" class="absolute top-2 right-4 text-white text-xl">
+            <i class="fas fa-times"></i>
+        </button>
         <form class="space-y-3 flex flex-col items-center justify-center" [formGroup]="formSignUpUser">
             <div class="flex flex-row">
                 <div class="mt-2 w-auto">
