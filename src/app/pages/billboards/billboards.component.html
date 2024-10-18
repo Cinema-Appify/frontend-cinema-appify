@@ -1,9 +1,26 @@
 <div class="h-screen w-full flex flex-col">
     <app-navbar />
-    <div class="flex-grow flex flex-col items-center justify-center">
-        <div class="text-center">
-            <!-- Utilizar elementos aqui adentro, no cambiar lo de fuera -->
-            <p>billboards works!</p>
+    <div class="flex-grow flex flex-col items-center justify-start">
+
+        <div class="grid grid-cols-4 gap-1">
+            <app-search-input class="col-span-2 mx-5" />
+            <app-general-select class="col-span-2 mx-5" />
+            <app-movie-card [movieImg]="'img/the-wild-robot.jpg'" [titleMovie]="'The Wild Robot'"
+                [cardType]="'actualMovie'" [duration]="150"
+                [synopsis]="'Robot Salvaje (The Wild Robot), DreamWorks Animation nos presenta la adaptación del éxito literario de Peter Brown, escrita y dirigida por el tres veces nominado al Óscar, Chris Sanders creador de películas como: Los Croods, Lilo & Stitch y Como entrenar a tu Dragón, nos trae estaépica aventura donde conoceremos a la unidad ROZZUM 7134, mejor conocida como “Roz” quien debe aprender a adaptarse al duro entorno salvaje, en esta historia sobre el autodescubrimiento de lo que significa estar vivo y conectado con todos los seres vivos entorno salvaje, en esta historia sobre el autodescubrimiento de lo que significa estar vivo y conectado con todos los seres vivos entorno salvaje, en esta historia sobre el autodescubrimiento de lo que significa estar vivo y conectado con todos los seres vivos.'"
+                [genres]="['Animación', 'Ciencia Ficción']"></app-movie-card>
+            <app-movie-card [movieImg]="'img/the-wild-robot.jpg'" [titleMovie]="'The Wild Robot'"
+                [cardType]="'upcomingReleases'" [duration]="150"
+                [synopsis]="'Robot Salvaje (The Wild Robot), DreamWorks Animation nos presenta la adaptación del éxito literario de Peter Brown, escrita y dirigida por el tres veces nominado al Óscar, Chris Sanders creador de películas como: Los Croods, Lilo & Stitch y Como entrenar a tu Dragón, nos trae estaépica aventura donde conoceremos a la unidad ROZZUM 7134, mejor conocida como “Roz” quien debe aprender a adaptarse al duro entorno salvaje, en esta historia sobre el autodescubrimiento de lo que significa estar vivo y conectado con todos los seres vivos entorno salvaje, en esta historia sobre el autodescubrimiento de lo que significa estar vivo y conectado con todos los seres vivos entorno salvaje, en esta historia sobre el autodescubrimiento de lo que significa estar vivo y conectado con todos los seres vivos.'"
+                [genres]="['Animación', 'Ciencia Ficción']"></app-movie-card>
+            <app-movie-card [movieImg]="'img/the-wild-robot.jpg'" [titleMovie]="'The Wild Robot'"></app-movie-card>
+            <app-movie-card [movieImg]="'img/the-wild-robot.jpg'" [titleMovie]="'The Wild Robot'"></app-movie-card>
+            <app-movie-card [movieImg]="'img/the-wild-robot.jpg'" [titleMovie]="'The Wild Robot'"></app-movie-card>
+            <app-movie-card [movieImg]="'img/the-wild-robot.jpg'" [titleMovie]="'The Wild Robot'"></app-movie-card>
         </div>
+        <!-- <div class="text-center">
+            Utilizar elementos aqui adentro, no cambiar lo de fuera
+            <p>billboards works!</p>
+        </div> -->
     </div>
 </div>

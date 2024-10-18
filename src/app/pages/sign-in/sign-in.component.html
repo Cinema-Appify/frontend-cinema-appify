@@ -7,15 +7,16 @@
             <div>
                 <div class="mt-2 w-96">
                     <app-general-input id="email" name="email" type="email" autocomplete="email" [required]="true"
-                        formControlName="email" placeholder="Correo electrónico" icon="heroUserSolid" />
+                        formControlName="email" placeholder="Correo electrónico" icon="heroUserSolid"
+                        [invalid]="invalidEmail" />
                 </div>
             </div>
 
             <div>
                 <div class="mt-2 w-96">
                     <app-general-input id="password" name="password" type="password" autocomplete="password"
-                        [required]="true" formControlName="password" placeholder="Contraseña"
-                        icon="heroLockClosedSolid" />
+                        [required]="true" formControlName="password" placeholder="Contraseña" icon="heroLockClosedSolid"
+                        [invalid]="invalidPassword" />
                 </div>
                 <a [routerLink]="['/forgot-password']" class="flex justify-center font-bold text-white mt-2 w-full">
                     ¿Olvidaste tu contraseña?

@@ -20,11 +20,32 @@ export class SignInComponent {
   private accessService = inject(AccessService);
   private router = inject(Router);
   public formBuild = inject(FormBuilder);
+  invalidEmail: boolean = false;
+  invalidPassword: boolean = false;
 
   public formSignIn: FormGroup = this.formBuild.group({
     email: ['', Validators.required],
     password: ['', Validators.required]
   });
+
+  ngOnInit() {
+    this.formSignIn.get('email')?.valueChanges.subscribe(() => this.emailValid(this.formSignIn));
+    this.formSignIn.get('password')?.valueChanges.subscribe(() => this.passwordValid(this.formSignIn));
+  }
+
+  emailValid(formGroup: FormGroup) {
+    const email = formGroup.get('email');
+    if (email?.value !== '') {
+      this.invalidEmail = false;
+    }
+  }
+
+  passwordValid(formGroup: FormGroup) {
+    const password = formGroup.get('password');
+    if (password?.value !== '') {
+      this.invalidPassword = false;
+    }
+  }
 
   constructor(private toastr: ToastrService) { }
 
@@ -61,6 +82,9 @@ export class SignInComponent {
         }
       });
     } else {
+      if (this.formSignIn.value.email === '') this.invalidEmail = true;
+      if (this.formSignIn.value.password === '') this.invalidPassword = true;
+
       this.toastr.error('Por favor, complete todos los campos.', 'Error al iniciar sesión', {
         timeOut: 2000,
       });
