@@ -7,6 +7,7 @@ import { ResponseAccess } from '../../Interfaces/ResponseAccess';
 import { GeneralInputComponent } from '../../components/general-input/general-input.component';
 import { GeneralButtonComponent } from '../../components/general-button/general-button.component';
 import { SignUpCinema } from '../../Interfaces/SignUpCinema';
+import { CloudinaryService } from '../../services/cloudinary.service';
 
 @Component({
   selector: 'app-sign-up-cinema',
@@ -32,7 +33,7 @@ export class SignUpCinemaComponent {
     photo: [null]
   }, { validators: this.passwordMatchValidator });
 
-  constructor(private toastr: ToastrService) { }
+  constructor(private toastr: ToastrService, private cloudinaryService: CloudinaryService) { }
 
   onImageSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -73,29 +74,48 @@ export class SignUpCinemaComponent {
     return isMatch ? null : { mismatch: true };
   }
 
-  signUpCinema(): void {
+  async signUpCinema(): Promise<void> {
     if (this.formSignUpCinema.valid) {
+  
+      let imageUrl: string | null = null;
+  
+      if (this.selectedFile) {
+        try {
+          imageUrl = await this.cloudinaryService.uploadImage(this.selectedFile);
+          console.log('Imagen subida exitosamente, URL:', imageUrl); // Log para verificar la URL de la imagen
+        } catch (error) {
+          this.toastr.error('Error al subir la imagen. Inténtelo de nuevo.');
+          console.error('Error al subir la imagen:', error); // Log para verificar si ocurre un error en la subida de la imagen
+          return;
+        }
+      }
+  
+      // Aquí verificamos los datos antes de enviarlos
       const objeto: SignUpCinema = {
         email: this.formSignUpCinema.value.email,
         name: this.formSignUpCinema.value.name,
         password: this.formSignUpCinema.value.password,
-        photo: this.formSignUpCinema.value.photo
-      }
-
+        photo: imageUrl
+      };
+  
+      console.log('Datos del formulario enviados:', objeto); // Log para verificar el objeto que se envía al backend
+  
+      // Llamada al servicio para registrar el cine
       this.accessService.signUpCinema(objeto).subscribe({
         next: (response: ResponseAccess) => {
-          console.log('Respuesta del servidor:', response);
+          console.log('Respuesta del servidor:', response); // Log para verificar la respuesta del servidor
           this.toastr.success('Cine registrado exitosamente. Redirigiendo...');
           setTimeout(() => this.router.navigate(['']), 2000);
         },
         error: (error) => {
-          console.error('Error al registrar el cine:', error);
+          console.error('Error al registrar el cine:', error); // Log para manejar el error si ocurre
           this.toastr.error('Error al registrar el cine. Inténtalo de nuevo.');
         }
       });
     } else {
       this.toastr.error('Por favor, completa el formulario correctamente.');
-      console.log('Formulario inválido. Errores:', this.formSignUpCinema.errors);
+      console.log('Formulario inválido. Errores:', this.formSignUpCinema.errors); // Log para verificar los errores de validación del formulario
     }
   }
+  
 }
