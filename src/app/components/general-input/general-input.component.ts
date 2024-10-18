@@ -10,7 +10,6 @@ import { heroEyeSlashSolid, heroEyeSolid } from '@ng-icons/heroicons/solid';
   imports: [ReactiveFormsModule, CommonModule, NgIconComponent],
   viewProviders: [provideIcons({ heroEyeSolid, heroEyeSlashSolid })],
   templateUrl: './general-input.component.html',
-  styleUrls: ['./general-input.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

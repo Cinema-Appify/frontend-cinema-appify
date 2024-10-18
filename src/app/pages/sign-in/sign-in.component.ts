@@ -15,7 +15,6 @@ import { heroLockClosedSolid, heroUserSolid } from '@ng-icons/heroicons/solid';
   imports: [RouterLink, ReactiveFormsModule, GeneralInputComponent, NgIconComponent, GeneralButtonComponent],
   viewProviders: [provideIcons({ heroUserSolid, heroLockClosedSolid })],
   templateUrl: './sign-in.component.html',
-  styleUrl: './sign-in.component.css',
 })
 export class SignInComponent {
   private accessService = inject(AccessService);
@@ -50,7 +49,7 @@ export class SignInComponent {
               roles: response.roles,
               tokenType: response.tokenType,
             }));
-          //this.router.navigate(['/home']);
+          this.router.navigate(['/home']);
         },
         error: (error) => {
           console.error(error);

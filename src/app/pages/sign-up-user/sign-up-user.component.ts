@@ -13,7 +13,6 @@ import { SignUpUser } from '../../Interfaces/SignUpUser';
   standalone: true,
   imports: [RouterLink, ReactiveFormsModule, GeneralInputComponent, GeneralButtonComponent],
   templateUrl: './sign-up-user.component.html',
-  styleUrl: './sign-up-user.component.css'
 })
 export class SignUpUserComponent {
   private accessService = inject(AccessService);

@@ -6,6 +6,14 @@ import { SignUpCinemaComponent } from './pages/sign-up-cinema/sign-up-cinema.com
 import { RegisterCinemaComponent } from './pages/register-cinema/register-cinema.component';
 import { GeneralFormComponent } from './components/general-form/general-form.component';
 import { RegisterUserComponent } from './pages/register-user/register-user.component';
+import { HomeComponent } from './pages/home/home.component';
+import { UsersComponent } from './pages/users/users.component';
+import { CinemasComponent } from './pages/cinemas/cinemas.component';
+import { BillboardsComponent } from './pages/billboards/billboards.component';
+import { UpcomingReleasesComponent } from './pages/upcoming-releases/upcoming-releases.component';
+import { MoviesComponent } from './pages/movies/movies.component';
+import { RoomsComponent } from './pages/rooms/rooms.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 export const routes: Routes = [
     {
@@ -37,9 +45,46 @@ export const routes: Routes = [
         path: 'register-user',
         title: 'Register User',
         component: RegisterUserComponent
-    }
-  
-    
-   
+    },
+    {
+        path: 'home',
+        title: 'Home',
+        component: HomeComponent,
+    },
+    {
+        path: 'users',
+        title: 'Users',
+        component: UsersComponent,
+    },
+    {
+        path: 'cinemas',
+        title: 'Cinemas',
+        component: CinemasComponent,
+    },
+    {
+        path: 'billboards',
+        title: 'Billboards',
+        component: BillboardsComponent,
+    },
+    {
+        path: 'upcoming-releases',
+        title: 'Upcoming Releases',
+        component: UpcomingReleasesComponent,
+    },
+    {
+        path: 'movies',
+        title: 'Movies',
+        component: MoviesComponent,
+    },
+    {
+        path: 'rooms',
+        title: 'Rooms',
+        component: RoomsComponent,
+    },
+    {
+        path: 'user-profile',
+        title: 'Profile',
+        component: UserProfileComponent,
+    },
     // { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];
