@@ -1,17 +1,20 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 <div class="container mx-auto mt-36">
-    <h2 class="text-xl text-center mb-4">Listado de Cines</h2>
 
-    <app-general-table [columns]="['Id', 'Nombre', 'Ubicación', 'Estado', 'Rol']" [data]="cinemas"
-        [editAction]="editCinema" [deleteAction]="deleteCinema"></app-general-table>
+    <div class="bg-grayish-blue text-white rounded-t-lg flex justify-between items-center px-6 py-3">
 
+        <h3 class="text-lg text-center flex-grow">Cines</h3>
 
-    <div class="flex justify-center mt-6">
-        <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg" (click)="openModal()">
-            Añadir Cine <i class="fas fa-plus ml-2"></i>
+        <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 ml-auto" (click)="openModal()">
+            Añadir <i class="fas fa-plus ml-2"></i>
         </button>
+
     </div>
+
+    <app-general-table [columns]="columnNames" [data]="cinemas" [editAction]="editCinema"
+        [deleteAction]="deleteCinema"></app-general-table>
+
 </div>
 
 

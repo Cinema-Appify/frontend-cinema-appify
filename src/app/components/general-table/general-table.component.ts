@@ -10,7 +10,7 @@ import { Component, Input } from '@angular/core';
 })
 export class GeneralTableComponent {
 
-  @Input() columns: string[] = [];
+  @Input() columns: { title: string; key: string}[] = [];
   @Input() data: any[] = [];
   @Input() actions: boolean = true;
   @Input() editAction: (id: number) => void = () => {};
