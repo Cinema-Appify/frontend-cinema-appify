@@ -4,6 +4,8 @@ import { appsSettings } from '../settings/appsettings';
 import { ResponseAccess } from '../Interfaces/ResponseAccess';
 import { SignIn } from '../Interfaces/SignIn';
 import { SignUpUser } from '../Interfaces/SignUpUser';
+import { SignUpCinema } from '../Interfaces/SignUpCinema';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +28,19 @@ export class AccessService {
     return this.http.post<ResponseAccess>(this.baseUrl + 'auth/signup', {
       email: objeto.email,
       name: objeto.name,
-      lastname1: objeto.lastname1,
-      lastname2: objeto.lastname2,
+      firstName: objeto.firstName,
+      lastName: objeto.lastName,
       password: objeto.password
     });
   }
+
+  signUpCinema(objeto: SignUpCinema) {
+    return this.http.post<ResponseAccess>(`${this.baseUrl}auth/signUpCinema`, {
+      email: objeto.email,
+      name: objeto.name,
+      photo: objeto.photo,
+      password: objeto.password
+    });
+  }
+
 }
