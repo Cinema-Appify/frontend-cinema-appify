@@ -16,5 +16,9 @@ export class GeneralTableComponent {
   @Input() editAction: (id: number) => void = () => {};
   @Input() deleteAction: (id: number) => void = () => {};
 
-  
+
+  getRoleNames(roles: any[]): string {
+    return roles.map(role => role.name).join(', '); // Une los nombres de los roles, en caso de 
+                                                    //existir mas de un rol asignado en el array
+  }
 }

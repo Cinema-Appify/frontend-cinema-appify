@@ -25,28 +25,49 @@
         <button (click)="closeModal()" class="absolute top-2 right-4 text-white text-xl">
             <i class="fas fa-times"></i>
         </button>
-        <form class="space-y-4">
-            <div class="grid grid-cols-2 gap-4">
-                <app-general-input [placeholder]="'Correo electrónico'" [type]="'email'" [id]="'email'"
-                    [name]="'email'"></app-general-input>
-                <app-general-input [placeholder]="'Nombre'" [type]="'text'" [id]="'nombre'"
-                    [name]="'nombre'"></app-general-input>
+        <form class="space-y-3 flex flex-col items-center justify-center" [formGroup]="formSignUpUser">
+            <div class="flex flex-row">
+                <div class="mt-2 w-auto">
+                    <app-general-input id="email" name="email" type="email" autocomplete="email" [required]="true"
+                        formControlName="email" placeholder="Correo electrónico" />
+                </div>
+                <div class="mt-2 w-auto ml-2">
+                    <app-general-input id="name" name="name" type="name" autocomplete="name" [required]="true"
+                        formControlName="name" placeholder="Nombre" />
+                </div>
             </div>
-            <div class="grid grid-cols-2 gap-4">
-                <app-general-input [placeholder]="'Apellido'" [type]="'text'" [id]="'apellido'"
-                    [name]="'apellido'"></app-general-input>
-                <app-general-input [placeholder]="'Apellido 2'" [type]="'text'" [id]="'apellido2'"
-                    [name]="'apellido2'"></app-general-input>
+            <div class="flex flex-row">
+                <div class="w-auto">
+                    <app-general-input id="lastname1" name="lastname1" type="lastname1" autocomplete="lastname1"
+                        [required]="true" formControlName="lastname1" placeholder="Apellido 1" />
+                </div>
+                <div class="w-auto ml-2">
+                    <app-general-input id="lastname2" name="lastname2" type="lastname2" autocomplete="lastname2"
+                        [required]="false" formControlName="lastname2" placeholder="Apellido 2" />
+                </div>
             </div>
-            <div class="grid grid-cols-2 gap-4">
-                <app-general-input [placeholder]="'Contraseña'" [type]="'password'" [id]="'password'"
-                    [name]="'password'"></app-general-input>
-                <app-general-input [placeholder]="'Repetir contraseña'" [type]="'password'" [id]="'repeatPassword'"
-                    [name]="'repeatPassword'"></app-general-input>
+            <div class="flex flex-row">
+                <div class="w-auto">
+                    <app-general-input id="password" name="password" type="password" autocomplete="password"
+                        [required]="true" formControlName="password" placeholder="Contraseña" />
+                </div>
+                <div class="w-auto ml-2">
+                    <app-general-input id="repeatPassword" name="repeatPassword" type="password"
+                        autocomplete="repeatPassword" [required]="true" formControlName="repeatPassword"
+                        placeholder="Repetir Contraseña" />
+                </div>
             </div>
-            <div class="flex justify-center mt-8">
-                <app-general-button [text]="'Registrar'" [color]="'bg-red-600'" [colorHover]="'hover:bg-red-700'"
-                    [width]="54" type="submit"></app-general-button>
+            <div class="flex flex-row">
+                <a [routerLink]="['']" class="flex justify-center font-bold text-white mt-1 w-auto">
+                    ¿Ya tienes una cuenta?
+                </a>
+                <a [routerLink]="['/sign-up-cinema']" class="flex justify-center font-bold text-white mt-1 w-auto ml-2">
+                    ¿Deseas registrar un cine?
+                </a>
+            </div>
+            <div>
+                <app-general-button text="Registrar" color="bg-strong-red" colorHover="hover:bg-light-red" class="mt-2"
+                    (click)="signUpUser()" />
             </div>
         </form>
     </div>

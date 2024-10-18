@@ -38,6 +38,7 @@ export const routes: Routes = [
         title: 'Register User',
         component: RegisterUserComponent
     }
+  
     
    
     // { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page

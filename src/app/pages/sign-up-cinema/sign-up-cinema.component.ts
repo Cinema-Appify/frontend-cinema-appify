@@ -21,9 +21,9 @@ export class SignUpCinemaComponent {
   private router = inject(Router);
   private formBuild = inject(FormBuilder);
 
-  // public formSignUpCinema: FormGroup;
   public imagePreview: string | ArrayBuffer | null = null;
   private selectedFile: File | null = null;
+  public isLoading = false; // Para manejar el estado de carga
 
   public formSignUpCinema: FormGroup = this.formBuild.group({
     email: ['', [Validators.required, Validators.email]],
@@ -76,7 +76,7 @@ export class SignUpCinemaComponent {
 
   async signUpCinema(): Promise<void> {
     if (this.formSignUpCinema.valid) {
-  
+      this.isLoading = true;// Activa el estado de cargqa
       let imageUrl: string | null = null;
   
       if (this.selectedFile) {
@@ -86,11 +86,12 @@ export class SignUpCinemaComponent {
         } catch (error) {
           this.toastr.error('Error al subir la imagen. Inténtelo de nuevo.');
           console.error('Error al subir la imagen:', error); // Log para verificar si ocurre un error en la subida de la imagen
+          this.isLoading = false;
           return;
         }
       }
   
-      // Aquí verificamos los datos antes de enviarlos
+      
       const objeto: SignUpCinema = {
         email: this.formSignUpCinema.value.email,
         name: this.formSignUpCinema.value.name,
@@ -105,11 +106,16 @@ export class SignUpCinemaComponent {
         next: (response: ResponseAccess) => {
           console.log('Respuesta del servidor:', response); // Log para verificar la respuesta del servidor
           this.toastr.success('Cine registrado exitosamente. Redirigiendo...');
-          setTimeout(() => this.router.navigate(['']), 2000);
-        },
+          setTimeout(() => {
+            this.router.navigate(['']);
+            this.isLoading = false;  // Desactivar el estado de carga
+            this.formSignUpCinema.reset();  // Limpiar el formulario
+          }, 2000);
+        }, 
         error: (error) => {
           console.error('Error al registrar el cine:', error); // Log para manejar el error si ocurre
           this.toastr.error('Error al registrar el cine. Inténtalo de nuevo.');
+          this.isLoading = false;
         }
       });
     } else {

@@ -29,47 +29,52 @@
         </button>
         <form class="space-y-4">
             <div class="flex flex-col items-center mb-6">
-                <div class="flex items-center">
-                    <img [src]="'img/MiniLogo.png'" alt="Upload Icon"
-                        class="w-12 h-12 mr-4 object-cover rounded-full" />
 
-                    <label for="photo"
-                        class="w-80 bg-transparent text-white rounded-lg p-4 border-dashed border-2 border-white flex justify-center items-center cursor-pointer">
-                        Arrastre o seleccione su imagen
-                        <input id="photo" type="file" accept="image/*" class="hidden" />
-                    </label>
+                <div class="flex flex-col items-center mb-6">
+                    <div class="flex items-center">
+                        <img [src]="imagePreview ? imagePreview : 'img/MiniLogo.png'" alt="Upload Icon"
+                            class="w-12 h-12 mr-4 object-cover rounded-full" />
+
+                        <label for="photo"
+                            class="w-80 bg-transparent text-white rounded-lg p-4 border-dashed border-2 border-white flex justify-center items-center cursor-pointer">
+                            Arrastre o seleccione su imagen
+                            <input id="photo" type="file" accept="image/*" (change)="onImageSelected($event)"
+                                class="hidden" />
+                        </label>
+                    </div>
                 </div>
+
+                <form class="space-y-3 flex flex-col items-center justify-center" [formGroup]="formSignUpCinema">
+                    <div class="flex flex-row">
+                        <div class="mt-2 w-auto">
+                            <app-general-input id="email" name="email" type="email" autocomplete="email"
+                                [required]="true" formControlName="email" placeholder="Correo electrónico" />
+                        </div>
+                        <div class="mt-2 w-auto ml-2">
+                            <app-general-input id="name" name="name" type="name" autocomplete="name" [required]="true"
+                                formControlName="name" placeholder="Nombre" />
+                        </div>
+                    </div>
+
+                    <div class="flex flex-row">
+                        <div class="w-auto">
+                            <app-general-input id="password" name="password" type="password" autocomplete="password"
+                                [required]="true" formControlName="password" placeholder="Contraseña" />
+                        </div>
+                        <div class="w-auto ml-2">
+                            <app-general-input id="repeatPassword" name="repeatPassword" type="password"
+                                autocomplete="repeatPassword" [required]="true" formControlName="repeatPassword"
+                                placeholder="Repetir Contraseña" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <app-general-button text="Registrar" color="bg-strong-red" colorHover="hover:bg-light-red"
+                            class="mt-2" (click)="signUpCinema()" />
+                    </div>
+
+                </form>
             </div>
-
-            <!-- Form -->
-            <form class="space-y-3 flex flex-col items-center justify-center">
-                <div class="flex flex-row">
-                    <div class="mt-2 w-auto">
-                        <app-general-input id="email" name="email" type="email" autocomplete="email" [required]="true"
-                            formControlName="email" placeholder="Correo electrónico" />
-                    </div>
-                    <div class="mt-2 w-auto ml-2">
-                        <app-general-input id="name" name="name" type="name" autocomplete="name" [required]="true"
-                            formControlName="name" placeholder="Nombre" />
-                    </div>
-                </div>
-
-                <!-- Password Inputs -->
-                <div class="flex flex-row">
-                    <div class="w-auto">
-                        <app-general-input id="password" name="password" type="password" autocomplete="password"
-                            [required]="true" formControlName="password" placeholder="Contraseña" />
-                    </div>
-                    <div class="w-auto ml-2">
-                        <app-general-input id="repeatPassword" name="repeatPassword" type="password"
-                            autocomplete="repeatPassword" [required]="true" formControlName="repeatPassword"
-                            placeholder="Repetir Contraseña" />
-                    </div>
-                </div>
-                <div class="flex justify-center mt-8">
-                    <button type="submit" class="bg-red-600 text-white py-2 px-8 rounded-lg">Registrar</button>
-                </div>
-            </form>
         </form>
     </div>
 </div>

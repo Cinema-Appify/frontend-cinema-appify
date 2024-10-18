@@ -1,15 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { GeneralTableComponent } from '../../components/general-table/general-table.component';
 import { CommonModule } from '@angular/common';
 import { GeneralInputComponent } from '../../components/general-input/general-input.component';
 import { GeneralButtonComponent } from "../../components/general-button/general-button.component";
 import { User } from '../../Interfaces/User';
 import { UserService } from '../../services/user.service';
+import { ToastrService } from 'ngx-toastr';
+import { AccessService } from '../../services/access.service';
+import { Router, RouterLink } from '@angular/router';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SignUpUser } from '../../Interfaces/SignUpUser';
 
 @Component({
   selector: 'app-register-user',
   standalone: true,
-  imports: [GeneralTableComponent, CommonModule, GeneralInputComponent, GeneralButtonComponent],
+  imports: [GeneralTableComponent, CommonModule, GeneralInputComponent, GeneralButtonComponent,RouterLink, ReactiveFormsModule],
   templateUrl: './register-user.component.html',
   styleUrl: './register-user.component.css'
 })
@@ -22,10 +27,23 @@ export class RegisterUserComponent {
     { title: 'Nombre', key: 'name' },
     { title: 'Apellido', key: 'firstName' },
     { title: 'Apellido2', key: 'lastName' },
-    { title: 'Rol', key: 'role' },
+    { title: 'Rol', key: 'roles' },
   ];
 
-  constructor(private userService: UserService){}
+  private accessService = inject(AccessService);
+  private router = inject(Router);
+  public formBuild = inject(FormBuilder);
+
+  public formSignUpUser: FormGroup = this.formBuild.group({
+    email: ['', Validators.required],
+    name: ['', Validators.required],
+    lastname1: ['', Validators.required],
+    lastname2: [''], // No Validators.required here, making it optional
+    password: ['', Validators.required],
+    repeatPassword: ['', Validators.required]
+  });
+
+  constructor(private userService: UserService, private toastr: ToastrService){}
 
 
   ngOnInit(): void {
@@ -42,7 +60,10 @@ export class RegisterUserComponent {
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
-          roles: user.roles
+          roles: user.roles?.map(role => ({
+            id: role.id,
+            name: role.name
+          }))
         }));
         console.log(this.users);
       },
@@ -67,4 +88,48 @@ export class RegisterUserComponent {
   closeModal() {
     this.isModalOpen = false;
   }
+
+  signUpUser() {
+    if (this.formSignUpUser.valid) {
+      const objeto: SignUpUser = {
+        email: this.formSignUpUser.value.email,
+        name: this.formSignUpUser.value.name,
+        firstName: this.formSignUpUser.value.lastname1,
+        lastName: this.formSignUpUser.value.lastname2?.trim() || '', // Ensure lastname2 is handled as optional
+        password: this.formSignUpUser.value.password,
+        repeatPassword: this.formSignUpUser.value.repeatPassword
+      }
+
+      if (objeto.repeatPassword === objeto.password) {
+        this.accessService.signUpUser(objeto).subscribe({
+          next: (response) => {
+            this.toastr.success('En unos momentos sera redirigido al sistema', 'Registro exitoso!');
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
+          },
+          error: (error) => {
+            console.error(error);
+            if (error.status === 401) {
+              this.toastr.error('Credenciales incorrectas. Por favor, inténtalo de nuevo.', 'Error de autenticación', {
+                timeOut: 2000,
+                progressBar: true
+              });
+            }
+          }
+        });
+      } else {
+        this.toastr.error('Las contraseñas no coinciden', 'Error en el registro', {
+          timeOut: 2000,
+          progressBar: true
+        });
+      }
+    } else {
+      this.toastr.error('Por favor, complete todos los campos.', 'Error al registrar al Usuario', {
+        timeOut: 2000,
+        progressBar: true
+      });
+    }
+  }
+
 }

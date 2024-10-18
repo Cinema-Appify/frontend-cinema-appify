@@ -13,7 +13,16 @@
       <ng-container *ngFor="let item of data">
         <tr class="border-b">
           <ng-container *ngFor="let col of columns">
-            <td class="p-2 text-center bg-gray-100">{{ item[col.key] }}</td>
+            <td class="p-2 text-center bg-gray-100">
+              <ng-container *ngIf="col.key === 'roles'; else defaultDisplay">
+                {{ getRoleNames(item.roles) }}
+                <!-- Si la fila es un "ROlE" se entra aca y extraemos los nombres de los roles, ya que esperamos un array 
+                 con el id y nombre, pero solo mostramos el nombre del rol -->
+              </ng-container>
+              <ng-template #defaultDisplay>
+                {{ item[col.key] }} <!-- Caso contrario se cae aca por defecto para otros campos -->
+              </ng-template>
+            </td>
           </ng-container>
           <td *ngIf="actions" class="p-2 text-center bg-gray-100">
             <div class="flex justify-center space-x-2">

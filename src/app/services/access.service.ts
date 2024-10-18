@@ -43,9 +43,4 @@ export class AccessService {
     });
   }
 
-  uploadImage(file: File): Observable<any> {
-    const formData = new FormData();
-    formData.append('multipartFile', file);
-    return this.http.post(this.baseUrl + 'auth/uploadImage', formData);
-  }
 }
