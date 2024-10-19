@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-<div class="container mx-auto mt-36">
+<div class="container mx-auto mt-20">
 
     <div class="bg-grayish-blue text-white rounded-t-lg flex justify-between items-center px-6 py-3">
 
@@ -56,14 +56,6 @@
                         autocomplete="repeatPassword" [required]="true" formControlName="repeatPassword"
                         placeholder="Repetir Contraseña" />
                 </div>
-            </div>
-            <div class="flex flex-row">
-                <a [routerLink]="['']" class="flex justify-center font-bold text-white mt-1 w-auto">
-                    ¿Ya tienes una cuenta?
-                </a>
-                <a [routerLink]="['/sign-up-cinema']" class="flex justify-center font-bold text-white mt-1 w-auto ml-2">
-                    ¿Deseas registrar un cine?
-                </a>
             </div>
             <div>
                 <app-general-button text="Registrar" color="bg-strong-red" colorHover="hover:bg-light-red" class="mt-2"
