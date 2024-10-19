@@ -1,20 +1,20 @@
 import { Component, inject } from '@angular/core';
-import { GeneralTableComponent } from '../../components/general-table/general-table.component';
 import { CommonModule } from '@angular/common';
-import { GeneralInputComponent } from '../../components/general-input/general-input.component';
-import { GeneralButtonComponent } from "../../components/general-button/general-button.component";
-import { User } from '../../Interfaces/User';
-import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
-import { AccessService } from '../../services/access.service';
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SignUpUser } from '../../Interfaces/SignUpUser';
+import { GeneralTableComponent } from '../../../components/general-table/general-table.component';
+import { GeneralInputComponent } from '../../../components/general-input/general-input.component';
+import { GeneralButtonComponent } from '../../../components/general-button/general-button.component';
+import { AccessService } from '../../../services/access.service';
+import { User } from '../../../Interfaces/User';
+import { UserService } from '../../../services/user.service';
+import { SignUpUser } from '../../../Interfaces/SignUpUser';
 
 @Component({
   selector: 'app-register-user',
   standalone: true,
-  imports: [GeneralTableComponent, CommonModule, GeneralInputComponent, GeneralButtonComponent,RouterLink, ReactiveFormsModule],
+  imports: [GeneralTableComponent, CommonModule, GeneralInputComponent, GeneralButtonComponent, RouterLink, ReactiveFormsModule],
   templateUrl: './register-user.component.html',
   styleUrl: './register-user.component.css'
 })
@@ -43,7 +43,7 @@ export class RegisterUserComponent {
     repeatPassword: ['', Validators.required]
   });
 
-  constructor(private userService: UserService, private toastr: ToastrService){}
+  constructor(private userService: UserService, private toastr: ToastrService) { }
 
 
   ngOnInit(): void {

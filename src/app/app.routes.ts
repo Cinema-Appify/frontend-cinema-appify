@@ -1,19 +1,18 @@
 import { Routes } from '@angular/router';
-import { SignInComponent } from './pages/sign-in/sign-in.component';
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-import { SignUpUserComponent } from './pages/sign-up-user/sign-up-user.component';
-import { SignUpCinemaComponent } from './pages/sign-up-cinema/sign-up-cinema.component';
-import { RegisterCinemaComponent } from './pages/register-cinema/register-cinema.component';
-import { GeneralFormComponent } from './components/general-form/general-form.component';
-import { RegisterUserComponent } from './pages/register-user/register-user.component';
+import { SignInComponent } from './pages/auth/sign-in/sign-in.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
+import { RegisterCinemaComponent } from './pages/admin/register-cinema/register-cinema.component';
 import { HomeComponent } from './pages/home/home.component';
-import { UsersComponent } from './pages/users/users.component';
-import { CinemasComponent } from './pages/cinemas/cinemas.component';
-import { BillboardsComponent } from './pages/billboards/billboards.component';
-import { UpcomingReleasesComponent } from './pages/upcoming-releases/upcoming-releases.component';
-import { MoviesComponent } from './pages/movies/movies.component';
-import { RoomsComponent } from './pages/rooms/rooms.component';
+import { CinemasComponent } from './pages/admin/cinemas/cinemas.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { SignUpUserComponent } from './pages/auth/sign-up-user/sign-up-user.component';
+import { SignUpCinemaComponent } from './pages/auth/sign-up-cinema/sign-up-cinema.component';
+import { UsersComponent } from './pages/admin/users/users.component';
+import { BillboardsComponent } from './pages/user/billboards/billboards.component';
+import { UpcomingReleasesComponent } from './pages/user/upcoming-releases/upcoming-releases.component';
+import { MoviesComponent } from './pages/cinema/movies/movies.component';
+import { RoomsComponent } from './pages/cinema/rooms/rooms.component';
+import { RegisterUserComponent } from './pages/admin/register-user/register-user.component';
 
 export const routes: Routes = [
     {
@@ -39,7 +38,7 @@ export const routes: Routes = [
     {
         path: 'register-cinema',
         title: 'Register Cinema',
-        component: RegisterCinemaComponent
+        component: RegisterCinemaComponent,
     },
     {
         path: 'register-user',

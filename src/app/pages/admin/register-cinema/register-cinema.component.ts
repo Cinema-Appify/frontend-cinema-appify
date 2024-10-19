@@ -1,22 +1,35 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { GeneralTableComponent } from "../../../components/general-table/general-table.component";
+import { CommonModule } from '@angular/common';
+import { GeneralInputComponent } from "../../../components/general-input/general-input.component";
+import { Cinema } from '../../../Interfaces/Cinema';
+import { CinemaService } from '../../../services/cinema.service';
 import { Router, RouterLink } from '@angular/router';
-import { AccessService } from '../../services/access.service';
-import { ResponseAccess } from '../../Interfaces/ResponseAccess';
-import { GeneralInputComponent } from '../../components/general-input/general-input.component';
-import { GeneralButtonComponent } from '../../components/general-button/general-button.component';
-import { SignUpCinema } from '../../Interfaces/SignUpCinema';
-import { CloudinaryService } from '../../services/cloudinary.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { GeneralButtonComponent } from '../../../components/general-button/general-button.component';
+import { AccessService } from '../../../services/access.service';
+import { ToastrService } from 'ngx-toastr';
+import { CloudinaryService } from '../../../services/cloudinary.service';
+import { SignUpCinema } from '../../../Interfaces/SignUpCinema';
+import { ResponseAccess } from '../../../Interfaces/ResponseAccess';
 
 @Component({
-  selector: 'app-sign-up-cinema',
+  selector: 'app-register-cinema',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, GeneralInputComponent, GeneralButtonComponent],
-  templateUrl: './sign-up-cinema.component.html',
-  styleUrls: ['./sign-up-cinema.component.css']
+  imports: [GeneralTableComponent, CommonModule, GeneralInputComponent, RouterLink, ReactiveFormsModule, GeneralInputComponent, GeneralButtonComponent],
+  templateUrl: './register-cinema.component.html',
+  styleUrl: './register-cinema.component.css'
 })
-export class SignUpCinemaComponent {
+export class RegisterCinemaComponent {
+  cinemas: Cinema[] = [];
+  isModalOpen = false;
+  columnNames = [
+    { title: 'ID', key: 'id' },
+    { title: 'Nombre', key: 'name' },
+    { title: 'Correo Electrónico', key: 'email' },
+    { title: 'Estado', key: 'state' },
+  ];
+
   private accessService = inject(AccessService);
   private router = inject(Router);
   private formBuild = inject(FormBuilder);
@@ -33,7 +46,31 @@ export class SignUpCinemaComponent {
     photo: [null]
   }, { validators: this.passwordMatchValidator });
 
-  constructor(private toastr: ToastrService, private cloudinaryService: CloudinaryService) { }
+  constructor(private cinemaService: CinemaService, private toastr: ToastrService,
+    private cloudinaryService: CloudinaryService) { }
+
+  ngOnInit(): void {
+    this.getCinemas();
+  }
+
+  getCinemas(): void {
+    this.cinemaService.getCinemas().subscribe(
+      (data) => {
+        console.log(data);
+        this.cinemas = data.map((cinema, index) => ({
+          id: index + 1, // No es el id real, toma el valor o posicion en el arrglo
+          name: cinema.name,
+          email: cinema.email,
+          state: cinema.state
+        }));
+        console.log(this.cinemas);
+      },
+      (error) => {
+        console.error('Error fetching cinemas', error);
+      }
+    );
+  }
+
 
   onImageSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -78,7 +115,7 @@ export class SignUpCinemaComponent {
     if (this.formSignUpCinema.valid) {
       this.isLoading = true;// Activa el estado de cargqa
       let imageUrl: string | null = null;
-  
+
       if (this.selectedFile) {
         try {
           imageUrl = await this.cloudinaryService.uploadImage(this.selectedFile);
@@ -90,28 +127,27 @@ export class SignUpCinemaComponent {
           return;
         }
       }
-  
-      
+
+
       const objeto: SignUpCinema = {
         email: this.formSignUpCinema.value.email,
         name: this.formSignUpCinema.value.name,
         password: this.formSignUpCinema.value.password,
         photo: imageUrl
       };
-  
+
       console.log('Datos del formulario enviados:', objeto); // Log para verificar el objeto que se envía al backend
-  
+
       // Llamada al servicio para registrar el cine
       this.accessService.signUpCinema(objeto).subscribe({
         next: (response: ResponseAccess) => {
           console.log('Respuesta del servidor:', response); // Log para verificar la respuesta del servidor
           this.toastr.success('Cine registrado exitosamente. Redirigiendo...');
           setTimeout(() => {
-            this.router.navigate(['']);
+            window.location.reload();
             this.isLoading = false;  // Desactivar el estado de carga
-            this.formSignUpCinema.reset();  // Limpiar el formulario
           }, 2000);
-        }, 
+        },
         error: (error) => {
           console.error('Error al registrar el cine:', error); // Log para manejar el error si ocurre
           this.toastr.error('Error al registrar el cine. Inténtalo de nuevo.');
@@ -123,5 +159,21 @@ export class SignUpCinemaComponent {
       console.log('Formulario inválido. Errores:', this.formSignUpCinema.errors); // Log para verificar los errores de validación del formulario
     }
   }
-  
+
+  editCinema(id: number) {
+    alert(`Editando cine con id: ${id}`);
+  }
+
+  deleteCinema(id: number) {
+    alert(`Eliminando cine con id: ${id}`);
+  }
+
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
+
 }

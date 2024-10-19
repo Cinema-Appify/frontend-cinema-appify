@@ -19,32 +19,35 @@
             <div class="flex flex-row">
                 <div class="mt-2 w-auto">
                     <app-general-input id="email" name="email" type="email" autocomplete="email" [required]="true"
-                        formControlName="email" placeholder="Correo electrónico" />
+                        formControlName="email" placeholder="Correo electrónico" [invalid]="invalidEmail" />
                 </div>
                 <div class="mt-2 w-auto ml-2">
                     <app-general-input id="name" name="name" type="name" autocomplete="name" [required]="true"
-                        formControlName="name" placeholder="Nombre" />
+                        formControlName="name" placeholder="Nombre" [invalid]="invalidName" />
                 </div>
             </div>
             <div class="flex flex-row">
                 <div class="w-auto">
                     <app-general-input id="lastname1" name="lastname1" type="lastname1" autocomplete="lastname1"
-                        [required]="true" formControlName="lastname1" placeholder="Apellido 1" />
+                        [required]="true" formControlName="lastname1" placeholder="Apellido 1"
+                        [invalid]="invalidLastName1" />
                 </div>
                 <div class="w-auto ml-2">
                     <app-general-input id="lastname2" name="lastname2" type="lastname2" autocomplete="lastname2"
-                        [required]="false" formControlName="lastname2" placeholder="Apellido 2" />
+                        [required]="false" formControlName="lastname2" placeholder="Apellido 2"
+                        [invalid]="invalidLastName2" />
                 </div>
             </div>
             <div class="flex flex-row">
                 <div class="w-auto">
                     <app-general-input id="password" name="password" type="password" autocomplete="password"
-                        [required]="true" formControlName="password" placeholder="Contraseña" />
+                        [required]="true" formControlName="password" placeholder="Contraseña"
+                        [invalid]="invalidPassword" />
                 </div>
                 <div class="w-auto ml-2">
                     <app-general-input id="repeatPassword" name="repeatPassword" type="password"
                         autocomplete="repeatPassword" [required]="true" formControlName="repeatPassword"
-                        placeholder="Repetir Contraseña" />
+                        placeholder="Repetir Contraseña" [invalid]="invalidRepeatPassword" />
                 </div>
             </div>
             <div class="flex flex-row">
