@@ -11,9 +11,9 @@ export class CloudinaryService {
     private cloudName = 'duhypoi5d';
     private uploadPreset = 'Cinema';
 
-    constructor() {}
+    constructor() { }
 
-    async uploadImage(file:File): Promise<string> {
+    async uploadImage(file: File): Promise<string> {
         const url = `https://api.cloudinary.com/v1_1/${this.cloudName}/image/upload`;
 
         const formData = new FormData();

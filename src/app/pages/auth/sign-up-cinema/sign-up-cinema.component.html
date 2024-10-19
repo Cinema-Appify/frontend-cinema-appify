@@ -1,0 +1,74 @@
+<div class="grid grid-cols-2 h-screen">
+  <!-- Left Side -->
+  <div class="h-full flex flex-col justify-center items-center bg-white">
+    <h1 class="text-lg font-bold text-grayish-blue text-center">¡Bienvenido al sistema de gestión de salas de cine!</h1>
+    <div class="mt-2">
+      <img src="img/sign-up-cinema-img.png" alt="Personas en el cine" class="w-96">
+    </div>
+    <p class="text-grayish-blue mt-2 text-center font-semibold">
+      Regístrate para disfrutar de nuestro servicio de<br /> gestión de salas de cine.
+    </p>
+  </div>
+
+  <!-- Right Side -->
+  <div class="h-full bg-grayish-blue flex flex-col justify-center items-center">
+    <div class="mb-8">
+      <img class="mx-auto w-96" src="img/movie-theater-logo.png" alt="Movie Theater Management Logo">
+    </div>
+
+    <!-- File Upload for Image -->
+    <div class="flex flex-col items-center mb-6">
+      <div class="flex items-center">
+        <img [src]="imagePreview ? imagePreview : 'img/MiniLogo.png'" alt="Upload Icon"
+          class="w-12 h-12 mr-4 object-cover rounded-full" />
+
+        <label for="photo"
+          class="w-80 bg-transparent text-white rounded-lg p-4 border-dashed border-2 border-white flex justify-center items-center cursor-pointer">
+          Arrastre o seleccione su imagen
+          <input id="photo" type="file" accept="image/*" (change)="onImageSelected($event)" class="hidden" />
+        </label>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form class="space-y-3 flex flex-col items-center justify-center" [formGroup]="formSignUpCinema">
+      <div class="flex flex-row">
+        <div class="mt-2 w-auto">
+          <app-general-input id="email" name="email" type="email" autocomplete="email" [required]="true"
+            formControlName="email" placeholder="Correo electrónico" [invalid]="invalidEmail" />
+        </div>
+        <div class="mt-2 w-auto ml-2">
+          <app-general-input id="name" name="name" type="name" autocomplete="name" [required]="true"
+            formControlName="name" placeholder="Nombre" [invalid]="invalidName" />
+        </div>
+      </div>
+
+      <!-- Password Inputs -->
+      <div class="flex flex-row">
+        <div class="w-auto">
+          <app-general-input id="password" name="password" type="password" autocomplete="password" [required]="true"
+            formControlName="password" placeholder="Contraseña" [invalid]="invalidPassword" />
+        </div>
+        <div class="w-auto ml-2">
+          <app-general-input id="repeatPassword" name="repeatPassword" type="password" autocomplete="repeatPassword"
+            [required]="true" formControlName="repeatPassword" placeholder="Repetir Contraseña"
+            [invalid]="invalidRepeatPassword" />
+        </div>
+      </div>
+
+      <!-- Already Have Account Link -->
+      <div class="flex flex-row">
+        <a [routerLink]="['']" class="flex justify-center font-bold text-white mt-1 w-auto">
+          ¿Ya tienes una cuenta?
+        </a>
+      </div>
+
+      <!-- Register Button -->
+      <div>
+        <app-general-button text="Registrar" color="bg-strong-red" colorHover="hover:bg-light-red" class="mt-2"
+          (click)="signUpCinema()" />
+      </div>
+
+    </form>
+  </div>
+</div>

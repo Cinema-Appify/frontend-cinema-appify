@@ -27,6 +27,7 @@ export class GeneralInputComponent implements ControlValueAccessor {
   @Input() placeholder: string = '';
   @Input() icon: string = '';
   isPasswordInput: boolean = false;
+  @Input() invalid: boolean = false;
 
   private internalValue: any = '';
 

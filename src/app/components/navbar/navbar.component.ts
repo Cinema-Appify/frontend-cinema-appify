@@ -41,8 +41,14 @@ export class NavbarComponent implements OnInit {
   firstName = '';
   name(): void {
     const usuario = localStorage.getItem('usuario');
-    this.nameVar = usuario ? JSON.parse(usuario).name : '';
-    this.firstName = usuario ? JSON.parse(usuario).firstName : '';
+    const parsedUsuario = usuario ? JSON.parse(usuario) : null;
+    if (parsedUsuario && (parsedUsuario.roles[0] === 'ROLE_USER' || parsedUsuario.roles[0] === 'ROLE_ADMIN')) {
+      this.nameVar = usuario ? JSON.parse(usuario).name : '';
+      this.firstName = usuario ? JSON.parse(usuario).firstName : '';
+    } else {
+      this.nameVar = usuario ? JSON.parse(usuario).name : '';
+    }
+
   }
 
   ngOnInit(): void {

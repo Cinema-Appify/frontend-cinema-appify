@@ -1,0 +1,48 @@
+<div class="grid grid-cols-2 divide-x h-screen">
+    <div class="h-full bg-grayish-blue flex flex-col justify-center">
+        <div>
+            <img class="mx-auto w-96" src="img/movie-theater-logo.png" alt="Movie Theather Management Logo">
+        </div>
+        <form class="space-y-3 flex flex-col items-center justify-center" [formGroup]="formSignIn">
+            <div>
+                <div class="mt-2 w-96">
+                    <app-general-input id="email" name="email" type="email" autocomplete="email" [required]="true"
+                        formControlName="email" placeholder="Correo electrónico" icon="heroUserSolid"
+                        [invalid]="invalidEmail" />
+                </div>
+            </div>
+
+            <div>
+                <div class="mt-2 w-96">
+                    <app-general-input id="password" name="password" type="password" autocomplete="password"
+                        [required]="true" formControlName="password" placeholder="Contraseña" icon="heroLockClosedSolid"
+                        [invalid]="invalidPassword" />
+                </div>
+                <a [routerLink]="['/forgot-password']" class="flex justify-center font-bold text-white mt-2 w-full">
+                    ¿Olvidaste tu contraseña?
+                </a>
+            </div>
+
+            <div>
+                <app-general-button (click)="signIn()" text="Iniciar" color="bg-strong-red"
+                    colorHover="hover:bg-light-red" class="mt-2" />
+            </div>
+        </form>
+    </div>
+    <div class="h-full flex flex-col justify-center">
+        <div class="flex flex-col items-center">
+            <h1 class="text-lg font-bold text-grayish-blue text-center">¡Bienvenido al sistema de gestión de salas de
+                cine!!</h1>
+            <div>
+                <img src="img/sign-in-img.png" alt="Palomitas y distintos objetos de cine" class="w-96">
+            </div>
+            <p class="text-grayish-blue mt-2 text-center font-semibold">
+                Inicia sesión para acceder al sistema de gestión
+                o regístrate<br>usando el
+                siguiente botón.
+            </p>
+            <app-general-button (click)="redirectSignUp()" text="Registrarse" color="bg-grayish-blue"
+                colorHover="hover:bg-grayish-blue-2" class="mt-2" />
+        </div>
+    </div>
+</div>

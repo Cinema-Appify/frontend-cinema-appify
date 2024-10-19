@@ -1,13 +1,15 @@
 <div class="relative rounded-md shadow-sm w-full">
     <div *ngIf="icon" class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-        <ng-icon [name]="icon" icon class="text-grayish-blue"></ng-icon>
+        <ng-icon [name]="icon" icon [ngClass]="{'text-strong-red': invalid }" class="text-grayish-blue"></ng-icon>
     </div>
     <input [placeholder]="placeholder" [id]="id" [name]="name" [type]="type" [attr.autocomplete]="autocomplete"
-        [attr.required]="required ? true : null" [ngClass]="{'pl-8': icon, 'pl-3': !icon}"
-        class="block rounded-md w-full border-0 py-2.5 pr-20 placeholder-grayish-blue text-grayish-blue font-semibold"
+        [attr.required]="required ? true : null"
+        [ngClass]="{'pl-8': icon, 'pl-3': !icon, 'border-strong-red': invalid, 'border-2': invalid, 'placeholder:text-strong-red': invalid }"
+        class="block rounded-md w-full py-2.5 pr-20 placeholder-grayish-blue text-grayish-blue font-semibold border-solid"
         (input)="onInput($event)" (blur)="onBlur()" [value]="value">
     <div *ngIf="type === 'password' || isPasswordInput" class="absolute inset-y-0 right-0 flex items-center">
         <ng-icon [name]="isPasswordInput ? 'heroEyeSlashSolid' : 'heroEyeSolid'"
-            class="cursor-pointer text-grayish-blue mr-3" (click)="togglePasswordVisibility()" />
+            [ngClass]="{'text-strong-red': invalid }" class="cursor-pointer text-grayish-blue mr-3"
+            (click)="togglePasswordVisibility()" />
     </div>
 </div>
