@@ -13,6 +13,7 @@ import { UpcomingReleasesComponent } from './pages/user/upcoming-releases/upcomi
 import { MoviesComponent } from './pages/cinema/movies/movies.component';
 import { RoomsComponent } from './pages/cinema/rooms/rooms.component';
 import { RegisterUserComponent } from './pages/admin/register-user/register-user.component';
+import { TicketsComponent } from './pages/user/tickets/tickets.component';
 
 export const routes: Routes = [
     {
@@ -64,6 +65,11 @@ export const routes: Routes = [
         path: 'billboards',
         title: 'Billboards',
         component: BillboardsComponent,
+    },
+    {
+        path: 'billboards/:id',
+        title: 'Tickets',
+        component: TicketsComponent,
     },
     {
         path: 'upcoming-releases',

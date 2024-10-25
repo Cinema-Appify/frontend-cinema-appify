@@ -44,8 +44,9 @@
                 </div>
             </div>
             <div *ngIf="cardType === 'actualMovie'" class="flex justify-center">
-                <app-general-button [text]="'Comprar boletos'" [color]="'bg-golden border-current'"
-                    [colorHover]="'hover:bg-golden hover:bg-opacity-75'" class="mb-4" />
+                <app-general-button (click)="handleBuyTickets()" [text]="'Comprar boletos'"
+                    [color]="'bg-golden border-current'" [colorHover]="'hover:bg-golden hover:bg-opacity-75'"
+                    class="mb-4" />
                 <app-general-button (click)="toggleModal()" [text]="'Cancelar'" [color]="'bg-white'"
                     [colorHover]="'hover:bg-white hover:bg-opacity-75'" [textColor]="'text-grayish-blue'"
                     class="mb-4 ml-1" />

@@ -1,15 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { GeneralButtonComponent } from '../general-button/general-button.component';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-movie-card',
   standalone: true,
   imports: [CommonModule, GeneralButtonComponent],
   templateUrl: './movie-card.component.html',
-  styleUrl: './movie-card.component.css'
 })
 export class MovieCardComponent {
+  private router = inject(Router);
+  @Input() id: number;
   @Input() movieImg: string;
   @Input() titleMovie: string;
   @Input() cardType: string;
@@ -18,6 +20,7 @@ export class MovieCardComponent {
   @Input() duration: number;
 
   constructor() {
+    this.id = 0;
     this.movieImg = '';
     this.titleMovie = '';
     this.cardType = '';
@@ -29,5 +32,9 @@ export class MovieCardComponent {
   showModal = false;
   toggleModal() {
     this.showModal = !this.showModal;
+  }
+
+  handleBuyTickets() {
+    this.router.navigate([`${'billboards/' + this.id}`]);
   }
 }
