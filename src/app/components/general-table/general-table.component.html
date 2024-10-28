@@ -1,6 +1,5 @@
 <div class="rounded-lg shadow-lg p-4" style="background-color: transparent;">
   <table class="min-w-full bg-white border rounded-lg">
-    <!-- Encabezado de la tabla -->
     <thead>
       <tr class="bg-grayish-blue text-white">
         <ng-container *ngFor="let col of columns">
@@ -16,11 +15,14 @@
             <td class="p-2 text-center bg-gray-100">
               <ng-container *ngIf="col.key === 'roles'; else defaultDisplay">
                 {{ getRoleNames(item.roles) }}
-                <!-- Si la fila es un "ROlE" se entra aca y extraemos los nombres de los roles, ya que esperamos un array 
-                 con el id y nombre, pero solo mostramos el nombre del rol -->
               </ng-container>
               <ng-template #defaultDisplay>
-                {{ item[col.key] }} <!-- Caso contrario se cae aca por defecto para otros campos -->
+                <ng-container *ngIf="col.key === 'synopsis'">
+                  <button (click)="handleView(item)" class="text-blue-500">Ver</button>
+                </ng-container>
+                <ng-container *ngIf="col.key !== 'synopsis'">
+                  {{ item[col.key] }} <!-- Muestra el contenido por defecto -->
+                </ng-container>
               </ng-template>
             </td>
           </ng-container>
