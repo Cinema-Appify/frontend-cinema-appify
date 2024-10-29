@@ -8,5 +8,5 @@ export interface User {
     lastName: string,
     password?: string,
     repeatPassword?: string,
-    roles?: Role[],
+    roles?: Role[]
 }

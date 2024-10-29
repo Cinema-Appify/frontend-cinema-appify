@@ -1,0 +1,94 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<div class="container mx-auto mt-20">
+
+    <div class="bg-grayish-blue text-white rounded-t-lg flex justify-between items-center px-6 py-3">
+
+        <h3 class="text-lg text-center flex-grow">Películas</h3>
+
+        <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 ml-auto" (click)="openModal()">
+
+            Añadir <i class="fas fa-plus ml-2"></i>
+
+        </button>
+
+    </div>
+
+    <app-general-table [columns]="columnNames" [data]="movies" [editAction]="editTheater"
+        [deleteAction]="deleteTheater">
+
+    </app-general-table>
+</div>
+
+
+<!-- Modal emergente -->
+<div *ngIf="isModalOpen"
+    class="fixed inset-0 bg-white bg-opacity-25 flex items-center justify-center transition-opacity duration-300 ease-in-out"
+    [ngClass]="{'backdrop-blur-sm': isModalOpen}">
+    <div class="bg-grayish-blue py-16 px-12 rounded-lg shadow-lg relative w-[48rem] my-auto transition-transform transform scale-95"
+        *ngIf="isModalOpen" [ngClass]="{'scale-100': isModalOpen}">
+        <button (click)="closeModal()" class="absolute top-2 right-4 text-white text-xl">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <form [formGroup]="formMovie" class="space-y-6 flex flex-col items-center justify-center w-full">
+            <!-- Foto -->
+            <div class="flex flex-col items-center mb-4">
+                <div class="flex items-center justify-center w-full">
+                    <img [src]="imagePreview ? imagePreview : 'img/MiniLogo.png'" alt="Upload Icon"
+                        class="w-14 h-14 mr-4 object-cover rounded-full" />
+                    <label for="photo"
+                        class="w-full max-w-xs bg-transparent text-white rounded-lg p-4 border-dashed border-2 border-white flex justify-center items-center cursor-pointer">
+                        Arrastre o seleccione su imagen
+                        <input id="photo" type="file" accept="image/*" (change)="onImageSelected($event)"
+                            class="hidden" />
+                    </label>
+                </div>
+            </div>
+
+            <!-- Nombre y Duración -->
+            <div class="flex flex-col w-full max-w-lg">
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <!-- Nombre -->
+                    <div class="relative rounded-md shadow-sm">
+                        <input id="name" formControlName="name" type="text" placeholder="Nombre"
+                            class="block w-full px-3 py-2.5 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 placeholder-grayish-blue text-grayish-blue font-semibold" />
+                    </div>
+                    <!-- Duración -->
+                    <div class="relative rounded-md shadow-sm">
+                        <input id="duration" formControlName="duration" type="text" placeholder="Duración (en minutos)"
+                            class="block w-full px-3 py-2.5 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 placeholder-grayish-blue text-grayish-blue font-semibold" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sinopsis -->
+            <div class="flex flex-col w-full max-w-lg">
+                <div class="relative rounded-md shadow-sm">
+                    <textarea id="sinopsis" formControlName="synopsis" rows="3" placeholder="Sinopsis"
+                        class="block w-full px-3 py-2.5 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 placeholder-grayish-blue text-grayish-blue font-semibold"
+                        style="resize: vertical; max-height: 300px;"></textarea>
+                </div>
+            </div>
+
+            <!-- Seleccionar sala a asignar -->
+            <div class="flex flex-col w-full max-w-lg mb-4">
+                <label for="room" class="text-white mb-2">Seleccionar Sala</label>
+                <select id="room" formControlName="room"
+                    class="w-full px-3 py-2 bg-white border border-gray-300 rounded-md">
+                    <option disabled selected>Todas las salas </option>
+                    <option [value]="0">Seleccione una sala</option>
+                    <option *ngIf="rooms.length === 0" disabled>No hay salas disponibles</option>
+                    <option *ngFor="let room of rooms" [value]="room.id">{{ room.name }}</option>
+                </select>
+            </div>
+
+            <!-- Botón de Registro -->
+            <div class="w-full max-w-lg">
+                <app-general-button text="Registrar" color="bg-strong-red" colorHover="hover:bg-light-red"
+                    class="w-full" (click)="createMovie()" />
+            </div>
+        </form>
+
+
+    </div>

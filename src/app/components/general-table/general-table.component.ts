@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-general-table',
@@ -10,12 +10,14 @@ import { Component, Input } from '@angular/core';
 })
 export class GeneralTableComponent {
 
-  @Input() columns: { title: string; key: string}[] = [];
+  @Input() columns: { title: string; key: string; action?: boolean}[] = [];
   @Input() data: any[] = [];
   @Input() actions: boolean = true;
-  @Input() editAction: (id: number) => void = () => {};
-  @Input() deleteAction: (id: number) => void = () => {};
+  @Input() editAction: (item: any) => void = () => {};
+  @Input() deleteAction: (item: any) => void = () => {};
 
+  
+  @Output() viewAction = new EventEmitter<{ type: 'synopsis' | 'photo', item: any }>();
 
   getRoleNames(roles: any[]): string {
     return roles.map(role => role.name).join(', '); // Une los nombres de los roles, en caso de 

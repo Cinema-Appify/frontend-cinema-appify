@@ -1,9 +1,9 @@
 
 export interface Cinema {
-  id: number; // Cambia a 'string' si estás usando cadenas
+  id: number; 
   email: string;
   name: string;
-  password?: string; // Si no lo usas, podrías considerar eliminarlo
+  password?: string; 
   photo?: string | null;
   state: string;
 }
