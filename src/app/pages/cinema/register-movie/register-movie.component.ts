@@ -29,15 +29,18 @@ export class RegisterMovieComponent {
   movies: Movie[] = [];
 
   isModalOpen = false;
+  isSynopsisModalOpen = false;
+  isImageModalOpen = false;
 
-  synopsisToShow: string | null = null;
+  selectedSynopsis: string = '';
+  selectedPhoto: string | null = null;
 
   columnNames = [
     { title: 'ID', key: 'id' },
     { title: 'Nombre', key: 'name' },
-    { title: 'Sipnosis', key: 'synopsis', action: true },
+    { title: 'Sipnosis', key: 'synopsis' },
     { title: 'Duración', key: 'duration' },
-    { title: 'Foto', key: 'photo', action: true },
+    { title: 'Foto', key: 'photo' },
   ];
 
   private movieService = inject(MovieService);
@@ -48,7 +51,8 @@ export class RegisterMovieComponent {
     name: ['', Validators.required],
     synopsis: ['', Validators.required],
     duration: ['', Validators.required],
-    photo: [null]
+    photo: [null],
+    room: ['', Validators.required]
   });
 
   constructor(private toastr: ToastrService, private cloudinaryService: CloudinaryService){}
@@ -68,7 +72,7 @@ export class RegisterMovieComponent {
   }
   
   private getTheaterId(): string{
-    return 'fsdftfg234523';
+    return 'Sala1';
   }
 
   loadRooms(cinemaId: string) {
@@ -84,16 +88,12 @@ export class RegisterMovieComponent {
     );
   }
 
-  editTheater(id: number) {
-    alert(`Editando cine con id: ${id}`);
+  deleteTheater(movie: string){
+
   }
 
-  deleteTheater(id: number) {
-    alert(`Eliminando cine con id: ${id}`);
-  }
+  editTheater(movie: string){
 
-  viewAction(movie: Movie): void {
-    this.openSynopsisModal(movie.synopsis);
   }
 
   openModal() {
@@ -110,16 +110,29 @@ export class RegisterMovieComponent {
   closeModal() {
     this.isModalOpen = false;
     this.formMovie.reset();
+    this.imagePreview = null;
   }
 
-  openSynopsisModal(synopsis: string): void {
-    this.synopsisToShow = synopsis; 
-    this.isModalOpen = true; 
+  openSynopsisModal(synopsis: string) {
+    this.selectedSynopsis = synopsis;
+    this.isSynopsisModalOpen = true;
   }
 
-  closeSynopsisModal(): void {
-    this.isModalOpen = false;
-    this.synopsisToShow = null; 
+  openImageModal(photo: string) {
+    this.selectedPhoto = photo;
+    this.isImageModalOpen = true;
+  }
+
+  closeSynopsisModal() {
+    this.isSynopsisModalOpen = false;
+  }
+
+  closeImageModal() {
+    this.isImageModalOpen = false;
+  }
+
+  handleViewAction(){
+    
   }
 
   onImageSelected(event: Event): void {
@@ -175,6 +188,8 @@ export class RegisterMovieComponent {
 
   async createMovie(): Promise<void> {
     if (this.formMovie.valid) {
+      console.log("Formulario no válido:", this.formMovie.errors);
+      console.log('InfoNombreTheater', this.formMovie.value.room);
       let imageUrl: string | null = null;
   
       if (this.selectedFile) {
@@ -186,15 +201,21 @@ export class RegisterMovieComponent {
           console.error('Error al subir la imagen:', error);
           return;
         }
+      }else{
+        this.toastr.error('Por Favor seleccione una imagen.', 'Error', {
+          timeOut: 2000,
+          progressBar: true
+        });
+        return
       }
-  
+      console.log("Imagen subida",imageUrl);
       // Aca contatenamos el "min" al valor de duración
       const durationWithMin = `${this.formMovie.value.duration.trim()} min`;
   
       const objeto: RegisterMovie = {
         name: this.formMovie.value.name.trim(),
         synopsis: this.formMovie.value.synopsis.trim(),
-        duration: durationWithMin,  // Aquí concatenamos "min"
+        duration: durationWithMin,  
         photo: imageUrl,
         cinemaId: this.getCinemaId(),
         theaterName: this.getTheaterId()  // Obtenemos el valor de la sala seleccionada
