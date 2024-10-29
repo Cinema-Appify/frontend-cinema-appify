@@ -13,8 +13,6 @@ import { UpcomingReleasesComponent } from './pages/user/upcoming-releases/upcomi
 import { MoviesComponent } from './pages/cinema/movies/movies.component';
 import { RoomsComponent } from './pages/cinema/rooms/rooms.component';
 import { RegisterUserComponent } from './pages/admin/register-user/register-user.component';
-import { RegisterTheaterComponent } from './pages/cinema/register-theater/register-theater.component';
-import { RegisterMovieComponent } from './pages/cinema/register-movie/register-movie.component';
 
 export const routes: Routes = [
     {
@@ -87,15 +85,5 @@ export const routes: Routes = [
         title: 'Profile',
         component: UserProfileComponent,
     },
-    {
-        path: 'register-theater',
-        title: 'Theater',
-        component: RegisterTheaterComponent,
-    },
-    {
-        path: 'register-movie',
-        title: 'Movie',
-        component: RegisterMovieComponent,
-    }
     // { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];
