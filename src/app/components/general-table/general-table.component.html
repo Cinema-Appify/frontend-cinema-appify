@@ -13,10 +13,8 @@
       <ng-container *ngFor="let item of data">
         <tr class="border-b">
           <ng-container *ngFor="let col of columns">
-            <td class="p-2 text-center bg-gray-100">
+            <td class="p-2 text-center bg-gray-100" [ngClass]="col.key === 'synopsis' ? 'max-w-52' : ''">
               <ng-container [ngSwitch]="col.key">
-
-
                 <!-- Mostrar imagen si el campo es 'photo' -->
                 <ng-container *ngSwitchCase="'photo'">
                   <img [src]="item[col.key]" alt="Imagen"
@@ -31,7 +29,12 @@
 
                 <!-- Mostrar texto normalmente para otros campos -->
                 <ng-container *ngSwitchDefault>
-                  {{ item[col.key] }}
+                  <div *ngIf="col.key === 'synopsis'; else defaultContent" class="max-h-28 overflow-y-auto">
+                    {{ item[col.key] }}
+                  </div>
+                  <ng-template #defaultContent>
+                    {{ item[col.key] }}
+                  </ng-template>
                 </ng-container>
 
               </ng-container>
