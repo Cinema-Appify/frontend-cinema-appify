@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NavbarComponent } from "../../../components/navbar/navbar.component";
 import { SeatMovieTheatherComponent } from "../../../components/seat-movie-theather/seat-movie-theather.component";
 import { GeneralButtonComponent } from "../../../components/general-button/general-button.component";
@@ -14,10 +14,21 @@ import { CommonModule } from '@angular/common';
   viewProviders: [provideIcons({ heroArrowUturnLeftSolid })],
   templateUrl: './tickets.component.html',
 })
-export class TicketsComponent {
+export class TicketsComponent implements OnInit {
   router = inject(Router)
 
   seatsSelected: Array<string> = [];
+
+  nameVar = '';
+
+  ngOnInit(): void {
+    this.name();
+  }
+
+  name(): void {
+    const usuario = localStorage.getItem('usuario');
+    this.nameVar = usuario ? JSON.parse(usuario).name : '';
+  }
 
   rowA = [
     { seatNumber: 1, seatState: 'available' },
@@ -150,6 +161,6 @@ export class TicketsComponent {
   handleBuyTickets() {
     console.log(this.seatsSelected);
     console.log('Tickets bought');
-    //this.router.navigate(['/user/payment']);
+    this.router.navigate(['/billboards']);
   }
 }
