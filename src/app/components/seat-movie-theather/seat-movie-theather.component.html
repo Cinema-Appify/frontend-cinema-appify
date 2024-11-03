@@ -1,0 +1,10 @@
+<div class="cursor-pointer" (click)="handleChangeSeatState();">
+    <svg class="{{color}}" width="35" height="35" viewBox="0 0 35 35" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M7 8.75H3C1.34315 8.75 0 10.0931 0 11.75V32C0 33.6569 1.34315 35 3 35H32C33.6569 35 35 33.6569 35 32V11.75C35 10.0931 33.6569 8.75 32 8.75H28V16.25C28 17.9069 26.6569 19.25 25 19.25H10C8.34315 19.25 7 17.9069 7 16.25V8.75Z">
+        </path>
+        <rect x="8.75" width="17.5" height="17.5" rx="3" />
+        <text x="17.5" y="31" font-size="12" text-anchor="middle"
+            class="fill-white font-bold text-xs">{{seatNumber}}</text>
+    </svg>
+</div>

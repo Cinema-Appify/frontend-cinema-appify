@@ -11,14 +11,14 @@ export class GeneralButtonComponent {
   @Input() text: string;
   @Input() color: string;
   @Input() colorHover: string;
-  @Input() width: number;
+  @Input() width: string;
   @Input() textColor: string;
 
   constructor() {
     this.text = '';
     this.color = '';
     this.colorHover = '';
-    this.width = 28;
+    this.width = '';
     this.textColor = 'text-white';
   }
 }

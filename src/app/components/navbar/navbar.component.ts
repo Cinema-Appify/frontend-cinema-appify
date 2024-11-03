@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { heroXCircleSolid } from '@ng-icons/heroicons/solid';
+import { heroPowerSolid } from '@ng-icons/heroicons/solid';
 import { GeneralButtonComponent } from '../general-button/general-button.component';
-import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [RouterLink, CommonModule, NgIconComponent, GeneralButtonComponent],
-  viewProviders: [provideIcons({ heroXCircleSolid })],
+  viewProviders: [provideIcons({ heroPowerSolid })],
   templateUrl: './navbar.component.html',
 }
 )
