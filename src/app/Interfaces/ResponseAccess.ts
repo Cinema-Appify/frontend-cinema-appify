@@ -6,7 +6,7 @@ export interface ResponseAccess {
     email: number,
     state?: string,
     roles: string[],
-    accessToken: string,
+    token: string,
     tokenType: string,
     status: number
 }

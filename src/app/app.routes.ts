@@ -84,6 +84,6 @@ export const routes: Routes = [
         path: 'user-profile',
         title: 'Profile',
         component: UserProfileComponent,
-    },
+    }
     // { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];

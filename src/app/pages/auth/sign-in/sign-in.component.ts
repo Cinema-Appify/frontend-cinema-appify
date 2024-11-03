@@ -63,7 +63,7 @@ export class SignInComponent {
             timeOut: 2000,
           });
           localStorage.clear();
-          localStorage.setItem('token', response.accessToken);
+          localStorage.setItem('token', response.token);
           if (response.roles[0] === 'ROLE_ADMIN' || response.roles[0] === 'ROLE_USER') {
             localStorage.setItem('usuario',
               JSON.stringify({
