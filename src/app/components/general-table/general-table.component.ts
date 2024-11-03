@@ -13,8 +13,10 @@ export class GeneralTableComponent {
   @Input() columns: { title: string; key: string}[] = [];
   @Input() data: any[] = [];
   @Input() actions: boolean = true;
-  @Input() editAction: (id: number) => void = () => {};
-  @Input() deleteAction: (id: number) => void = () => {};
+  @Input() deleteAction: (movieName: any) => void = () => {};
+  @Input() editAction: (movie: any) => void = () => {};
+
+
 
 
   getRoleNames(roles: any[]): string {

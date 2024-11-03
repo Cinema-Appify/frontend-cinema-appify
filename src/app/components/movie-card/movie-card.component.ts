@@ -15,7 +15,7 @@ export class MovieCardComponent {
   @Input() cardType: string;
   @Input() genres: Array<string> = [];
   @Input() synopsis: string;
-  @Input() duration: number;
+  @Input() duration: string;
 
   constructor() {
     this.movieImg = '';
@@ -23,7 +23,7 @@ export class MovieCardComponent {
     this.cardType = '';
     this.genres = [];
     this.synopsis = '';
-    this.duration = 0;
+    this.duration = '';
   }
 
   showModal = false;
