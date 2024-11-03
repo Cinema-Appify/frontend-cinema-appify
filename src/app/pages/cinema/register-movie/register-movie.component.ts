@@ -15,10 +15,9 @@ import { GeneralButtonComponent } from '../../../components/general-button/gener
 @Component({
   selector: 'app-register-movie',
   standalone: true,
-  imports: [GeneralTableComponent, CommonModule, GeneralInputComponent, RouterLink, 
+  imports: [GeneralTableComponent, CommonModule, GeneralInputComponent, RouterLink,
     ReactiveFormsModule, GeneralInputComponent, GeneralButtonComponent],
   templateUrl: './register-movie.component.html',
-  styleUrl: './register-movie.component.css'
 })
 export class RegisterMovieComponent {
 
@@ -55,27 +54,27 @@ export class RegisterMovieComponent {
     room: ['', Validators.required]
   });
 
-  constructor(private toastr: ToastrService, private cloudinaryService: CloudinaryService){}
+  constructor(private toastr: ToastrService, private cloudinaryService: CloudinaryService) { }
 
   ngOnInit() {
     const cinemaId = this.getCinemaId();
     this.getMovies(cinemaId);
   }
 
-  private getCinemaId(): string{
+  private getCinemaId(): string {
     const cinemaData = localStorage.getItem('usuario');
-    if(cinemaData){
+    if (cinemaData) {
       const cinema = JSON.parse(cinemaData);
       return cinema.id;
     }
     return '';
   }
-  
+
 
   loadRooms(cinemaId: string) {
     this.movieService.getRoomsByCinema(cinemaId).subscribe(
       (rooms) => {
-        this.rooms = rooms;  
+        this.rooms = rooms;
         console.log(rooms);
       },
       (error) => {
@@ -85,9 +84,9 @@ export class RegisterMovieComponent {
     );
   }
 
-  deleteTheater(movieName: string){
+  deleteTheater(movieName: string) {
     this.movieService.deleteMovie(movieName).subscribe({
-      next: (response) =>{
+      next: (response) => {
         this.toastr.success('Película eliminada éxitosamente', 'Eliminación esitosa')
         window.location.reload();
       },
@@ -98,7 +97,7 @@ export class RegisterMovieComponent {
     })
   }
 
-  editTheater(movie: string){
+  editTheater(movie: string) {
 
   }
 
@@ -112,7 +111,7 @@ export class RegisterMovieComponent {
     }
   }
 
-  
+
   closeModal() {
     this.isModalOpen = false;
     this.formMovie.reset();
@@ -137,8 +136,8 @@ export class RegisterMovieComponent {
     this.isImageModalOpen = false;
   }
 
-  handleViewAction(){
-    
+  handleViewAction() {
+
   }
 
   onImageSelected(event: Event): void {
@@ -183,7 +182,7 @@ export class RegisterMovieComponent {
           duration: movie.duration,
           photo: movie.photo
         }));
-        console.log("Datos a mostrar",this.movies);
+        console.log("Datos a mostrar", this.movies);
       },
       (error) => {
         console.error('Error fetching cinemas', error);
@@ -193,20 +192,20 @@ export class RegisterMovieComponent {
 
 
   async createMovie(): Promise<void> {
-   
+
     if (!this.formMovie.valid) {
       console.log("Formulario no válido:", this.formMovie.errors);
       this.toastr.error('Por favor, complete todos los campos obligatorios.', 'Error', {
         timeOut: 2000,
         progressBar: true
       });
-      return;  
+      return;
     }
-  
+
     console.log('InfoNombreTheater', this.formMovie.value.room);
     let imageUrl: string | null = null;
-  
-  
+
+
     if (this.selectedFile) {
       try {
         imageUrl = await this.cloudinaryService.uploadImage(this.selectedFile);
@@ -221,14 +220,14 @@ export class RegisterMovieComponent {
         timeOut: 2000,
         progressBar: true
       });
-      return;  
+      return;
     }
-  
+
     console.log("Imagen subida", imageUrl);
-    
-    
+
+
     const durationWithMin = `${this.formMovie.value.duration.trim()} min`;
-  
+
     const objeto: RegisterMovie = {
       name: this.formMovie.value.name.trim(),
       synopsis: this.formMovie.value.synopsis.trim(),
@@ -237,9 +236,9 @@ export class RegisterMovieComponent {
       cinemaId: this.getCinemaId(),
       theaterName: this.formMovie.value.room.trim()
     };
-  
+
     console.log("Datos del formulario", objeto);
-  
+
     this.movieService.registerMovie(objeto).subscribe({
       next: (response: ResponseAccess) => {
         console.log('Respuesta del servidor:', response);
@@ -255,6 +254,6 @@ export class RegisterMovieComponent {
       }
     });
   }
-  
+
 
 }
