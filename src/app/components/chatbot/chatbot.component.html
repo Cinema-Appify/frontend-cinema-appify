@@ -1,0 +1,62 @@
+<button (click)="openChatbot()"
+    class="fixed bottom-4 right-4 inline-flex items-center justify-center text-sm font-medium disabled:pointer-events-none disabled:opacity-50 border rounded-full w-14 h-14 m-0 cursor-pointer  p-0 normal-case leading-5 bg-strong-red hover:bg-light-red"
+    type="button" aria-haspopup="dialog" aria-expanded="false" data-state="closed">
+    <svg xmlns=" http://www.w3.org/2000/svg" width="30" height="40" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="text-white block border-gray-200 align-middle">
+        <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z" class="border-gray-200">
+        </path>
+    </svg>
+</button>
+
+<div *ngIf="chatBotWindow">
+    <div
+        class="fixed bottom-[calc(4rem+1.5rem)] right-0 mr-4 bg-white p-6 rounded-lg border-2 border-grayish-blue w-[30rem] h-[30rem] overflow-y-auto">
+
+        <div class="flex flex-col space-y-1.5 pb-6">
+            <h2 class="font-semibold text-lg tracking-tight">Chatbot</h2>
+            <p class="text-sm text-[#6b7280] leading-3">Powered by Cinema Appify</p>
+        </div>
+
+        <!-- Conversación -->
+        <div class="pr-4 h-[474px] overflow-y-scroll">
+            <div class="flex gap-3 my-4 text-sm">
+                <span class="relative flex shrink-0 overflow-hidden rounded-full w-8 h-8">
+                    <div class="rounded-full bg-gray-100 border p-2 flex items-center">
+                        <ng-icon name="heroSparklesSolid" class="w-10 h-10 text-grayish-blue"></ng-icon>
+                    </div>
+                </span>
+                <p class="leading-relaxed">
+                    <span class="block font-bold text-gray-700">IA</span>
+                    Hola, ¿cómo puedo ayudarte?
+                </p>
+            </div>
+
+            <div *ngFor="let message of messages" class="flex gap-3 my-4 text-sm">
+                <span class="relative flex shrink-0 overflow-hidden rounded-full w-8 h-8">
+                    <div class="rounded-full bg-gray-100 border p-2 flex items-center">
+                        <ng-icon *ngIf="message.sender === 'AI'" name="heroSparklesSolid"
+                            class="w-10 h-10 text-grayish-blue"></ng-icon>
+                        <ng-icon *ngIf="message.sender === 'You'" name="heroUserSolid"
+                            class="w-10 h-10 text-grayish-blue"></ng-icon>
+                    </div>
+                </span>
+                <p class="leading-relaxed">
+                    <span class="block font-bold text-gray-700">{{ message.sender }}</span>
+                    {{ message.text }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div
+        class="fixed bottom-[calc(4rem+1.5rem)] right-4 p-3 w-[30rem] bg-white rounded-b-lg border-r-2 border-l-2 border-b-2 border-grayish-blue">
+        <form class="flex items-center justify-center w-full space-x-2" [formGroup]="formChatbot">
+            <app-general-input id="message" name="message" type="text" autocomplete="message" [required]="true"
+                formControlName="message" placeholder="Escribe tu mensaje"
+                class="border-2 border-grayish-blue rounded-lg w-full" />
+
+            <app-general-button (click)="chatbot()" text="Enviar" color="bg-strong-red" colorHover="hover:bg-light-red"
+                height="py-2.5" />
+        </form>
+    </div>
+</div>

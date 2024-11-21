@@ -6,19 +6,20 @@ import { GeneralSelectComponent } from '../../../components/general-select/gener
 import { Movie } from '../../../Interfaces/Movie';
 import { MovieService } from '../../../services/movie.service';
 import { CommonModule } from '@angular/common';
+import { ChatbotComponent } from '../../../components/chatbot/chatbot.component';
 
 
 @Component({
   selector: 'app-billboards',
   standalone: true,
-  imports: [NavbarComponent, MovieCardComponent, SearchInputComponent, GeneralSelectComponent, CommonModule],
+  imports: [NavbarComponent, MovieCardComponent, SearchInputComponent, GeneralSelectComponent, CommonModule, ChatbotComponent],
   templateUrl: './billboards.component.html',
 })
 export class BillboardsComponent {
 
-  movies: Movie[] = []; 
+  movies: Movie[] = [];
 
-  constructor(private movieService: MovieService) {}
+  constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
     this.loadMovies();

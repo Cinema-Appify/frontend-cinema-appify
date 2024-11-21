@@ -16,7 +16,6 @@ import { SignUpUser } from '../../../Interfaces/SignUpUser';
   standalone: true,
   imports: [GeneralTableComponent, CommonModule, GeneralInputComponent, GeneralButtonComponent, RouterLink, ReactiveFormsModule],
   templateUrl: './register-user.component.html',
-  styleUrl: './register-user.component.css'
 })
 export class RegisterUserComponent {
   users: User[] = [];
@@ -105,7 +104,9 @@ export class RegisterUserComponent {
           next: (response) => {
             this.toastr.success('En unos momentos sera redirigido al sistema', 'Registro exitoso!');
             setTimeout(() => {
-              window.location.reload();
+              this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                this.router.navigate(['/register-user']);
+              });
             }, 2000);
           },
           error: (error) => {

@@ -245,7 +245,9 @@ export class RegisterMovieComponent {
         this.toastr.success('Película registrada exitosamente. Redirigiendo...');
         setTimeout(() => {
           this.formMovie.reset();
-          window.location.reload();
+          const cinemaId = this.getCinemaId();
+          this.getMovies(cinemaId);
+          this.closeModal();
         }, 2000);
       },
       error: (error) => {
@@ -254,6 +256,4 @@ export class RegisterMovieComponent {
       }
     });
   }
-
-
 }

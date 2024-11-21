@@ -8,7 +8,7 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { GeneralButtonComponent } from '../../../components/general-button/general-button.component';
 import { ToastrService } from 'ngx-toastr';
 import { heroLockClosedSolid, heroUserSolid } from '@ng-icons/heroicons/solid';
-import { state } from '@angular/animations';
+import { ChatbotComponent } from '../../../components/chatbot/chatbot.component';
 
 @Component({
   selector: 'app-sign-in',
