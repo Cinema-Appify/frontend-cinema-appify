@@ -13,8 +13,7 @@ import { ResponseAccess } from '../../../Interfaces/ResponseAccess';
   selector: 'app-sign-up-cinema',
   standalone: true,
   imports: [RouterLink, ReactiveFormsModule, GeneralInputComponent, GeneralButtonComponent],
-  templateUrl: './sign-up-cinema.component.html',
-  styleUrls: ['./sign-up-cinema.component.css']
+  templateUrl: './sign-up-cinema.component.html'
 })
 export class SignUpCinemaComponent {
   private accessService = inject(AccessService);

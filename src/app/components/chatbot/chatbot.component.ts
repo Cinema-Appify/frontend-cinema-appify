@@ -43,20 +43,18 @@ export class ChatbotComponent {
       };
 
       this.messages.push(objeto); // Agrega el mensaje del usuario al chat
+      this.formChatbot.reset(); // Resetea el formulario
 
       this.chatbotService.chatbot(objeto).subscribe({
         next: (response) => {
-          
-          const aiMessage = Array.isArray(response) 
-          ? response[0]?.generated_text || 'No response from AI' 
-          : response?.message || response?.generated_text || 'No response from AI'; 
-        
-        
-        // Agregar el mensaje con el formato adecuado
-        this.messages.push({ sender: 'AI', text: aiMessage });
-        
 
-          this.formChatbot.reset();
+          const aiMessage = Array.isArray(response)
+            ? response[0]?.generated_text || 'No response from AI'
+            : response?.message || response?.generated_text || 'No response from AI';
+
+
+          // Agregar el mensaje con el formato adecuado
+          this.messages.push({ sender: 'AI', text: aiMessage });
         },
         error: (error) => {
           console.error(error);

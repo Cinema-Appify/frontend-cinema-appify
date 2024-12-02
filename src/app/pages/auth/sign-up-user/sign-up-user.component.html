@@ -11,40 +11,40 @@
             </p>
         </div>
     </div>
-    <div class="h-full bg-grayish-blue flex flex-col justify-center">
+    <div class="h-full bg-grayish-blue flex flex-col justify-center items-center">
         <div>
             <img class="mx-auto w-96" src="img/movie-theater-logo.png" alt="Movie Theather Management Logo">
         </div>
-        <form class="space-y-3 flex flex-col items-center justify-center" [formGroup]="formSignUpUser">
-            <div class="flex flex-row">
-                <div class="mt-2 w-auto">
+        <form class="space-y-3 flex flex-col items-center justify-center w-3/4" [formGroup]="formSignUpUser">
+            <div class="flex flex-row w-full">
+                <div class="mt-2 w-full">
                     <app-general-input id="email" name="email" type="email" autocomplete="email" [required]="true"
                         formControlName="email" placeholder="Correo electrónico" [invalid]="invalidEmail" />
                 </div>
-                <div class="mt-2 w-auto ml-2">
+                <div class="mt-2 w-full ml-2">
                     <app-general-input id="name" name="name" type="name" autocomplete="name" [required]="true"
                         formControlName="name" placeholder="Nombre" [invalid]="invalidName" />
                 </div>
             </div>
-            <div class="flex flex-row">
-                <div class="w-auto">
+            <div class="flex flex-row w-full">
+                <div class="w-full">
                     <app-general-input id="lastname1" name="lastname1" type="lastname1" autocomplete="lastname1"
                         [required]="true" formControlName="lastname1" placeholder="Apellido 1"
                         [invalid]="invalidLastName1" />
                 </div>
-                <div class="w-auto ml-2">
+                <div class="w-full ml-2">
                     <app-general-input id="lastname2" name="lastname2" type="lastname2" autocomplete="lastname2"
                         [required]="false" formControlName="lastname2" placeholder="Apellido 2"
                         [invalid]="invalidLastName2" />
                 </div>
             </div>
-            <div class="flex flex-row">
-                <div class="w-auto">
+            <div class="flex flex-row w-full">
+                <div class="w-full">
                     <app-general-input id="password" name="password" type="password" autocomplete="password"
                         [required]="true" formControlName="password" placeholder="Contraseña"
                         [invalid]="invalidPassword" />
                 </div>
-                <div class="w-auto ml-2">
+                <div class="w-full ml-2">
                     <app-general-input id="repeatPassword" name="repeatPassword" type="password"
                         autocomplete="repeatPassword" [required]="true" formControlName="repeatPassword"
                         placeholder="Repetir Contraseña" [invalid]="invalidRepeatPassword" />
