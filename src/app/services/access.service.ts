@@ -5,7 +5,7 @@ import { ResponseAccess } from '../Interfaces/ResponseAccess';
 import { SignIn } from '../Interfaces/SignIn';
 import { SignUpUser } from '../Interfaces/SignUpUser';
 import { SignUpCinema } from '../Interfaces/SignUpCinema';
-import { Observable } from 'rxjs';
+import { ChatMessage } from '../Interfaces/ChatMessage';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +42,4 @@ export class AccessService {
       password: objeto.password
     });
   }
-
 }

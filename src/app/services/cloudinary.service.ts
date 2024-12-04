@@ -8,8 +8,8 @@ import axios from "axios";
 
 export class CloudinaryService {
 
-    private cloudName = 'duhypoi5d';
-    private uploadPreset = 'Cinema';
+    private cloudName = 'Agregue el nombre de su nube en cloudinary';
+    private uploadPreset = 'Agregue su uploadPreset de cloudinary';
 
     constructor() { }
 

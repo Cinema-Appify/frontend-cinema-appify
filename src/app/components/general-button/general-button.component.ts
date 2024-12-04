@@ -12,6 +12,7 @@ export class GeneralButtonComponent {
   @Input() color: string;
   @Input() colorHover: string;
   @Input() width: string;
+  @Input() height: string;
   @Input() textColor: string;
 
   constructor() {
@@ -19,6 +20,7 @@ export class GeneralButtonComponent {
     this.color = '';
     this.colorHover = '';
     this.width = '';
+    this.height = 'py-1.5';
     this.textColor = 'text-white';
   }
 }

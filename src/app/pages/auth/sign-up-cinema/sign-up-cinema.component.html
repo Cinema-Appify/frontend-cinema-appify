@@ -17,7 +17,7 @@
     </div>
 
     <!-- File Upload for Image -->
-    <div class="flex flex-col items-center mb-6">
+    <div class="flex flex-col items-center mb-6 w-3/4">
       <div class="flex items-center">
         <img [src]="imagePreview ? imagePreview : 'img/mini-logo.png'" alt="Upload Icon"
           class="w-12 h-12 mr-4 object-cover rounded-full" />
@@ -31,25 +31,25 @@
     </div>
 
     <!-- Form -->
-    <form class="space-y-3 flex flex-col items-center justify-center" [formGroup]="formSignUpCinema">
-      <div class="flex flex-row">
-        <div class="mt-2 w-auto">
+    <form class="space-y-3 flex flex-col items-center justify-center w-3/4" [formGroup]="formSignUpCinema">
+      <div class="flex flex-row w-full">
+        <div class="mt-2 w-full">
           <app-general-input id="email" name="email" type="email" autocomplete="email" [required]="true"
             formControlName="email" placeholder="Correo electrónico" [invalid]="invalidEmail" />
         </div>
-        <div class="mt-2 w-auto ml-2">
+        <div class="mt-2 w-full ml-2">
           <app-general-input id="name" name="name" type="name" autocomplete="name" [required]="true"
             formControlName="name" placeholder="Nombre" [invalid]="invalidName" />
         </div>
       </div>
 
       <!-- Password Inputs -->
-      <div class="flex flex-row">
-        <div class="w-auto">
+      <div class="flex flex-row w-full">
+        <div class="w-full">
           <app-general-input id="password" name="password" type="password" autocomplete="password" [required]="true"
             formControlName="password" placeholder="Contraseña" [invalid]="invalidPassword" />
         </div>
-        <div class="w-auto ml-2">
+        <div class="w-full ml-2">
           <app-general-input id="repeatPassword" name="repeatPassword" type="password" autocomplete="repeatPassword"
             [required]="true" formControlName="repeatPassword" placeholder="Repetir Contraseña"
             [invalid]="invalidRepeatPassword" />

@@ -18,7 +18,6 @@ import { ResponseAccess } from '../../../Interfaces/ResponseAccess';
   standalone: true,
   imports: [GeneralTableComponent, CommonModule, GeneralInputComponent, RouterLink, ReactiveFormsModule, GeneralInputComponent, GeneralButtonComponent],
   templateUrl: './register-cinema.component.html',
-  styleUrl: './register-cinema.component.css'
 })
 export class RegisterCinemaComponent {
   cinemas: Cinema[] = [];

@@ -13,10 +13,9 @@ import { TheaterService } from '../../../services/theater.service';
 @Component({
   selector: 'app-register-theater',
   standalone: true,
-  imports: [GeneralTableComponent, CommonModule, GeneralInputComponent, RouterLink, 
+  imports: [GeneralTableComponent, CommonModule, GeneralInputComponent, RouterLink,
     ReactiveFormsModule, GeneralInputComponent, GeneralButtonComponent],
   templateUrl: './register-theater.component.html',
-  styleUrl: './register-theater.component.css'
 })
 export class RegisterTheaterComponent {
 
@@ -26,7 +25,7 @@ export class RegisterTheaterComponent {
     { title: 'ID', key: 'id' },
     { title: 'Nombre', key: 'name' },
     { title: 'Horarios', key: 'schedule' },
-    
+
   ];
 
 
@@ -39,7 +38,7 @@ export class RegisterTheaterComponent {
     schedule: ['', Validators.required],
   });
 
-  constructor(private toastr: ToastrService){}
+  constructor(private toastr: ToastrService) { }
 
   ngOnInit(): void {
     const cinemaId = this.getCinemaId();
@@ -82,9 +81,9 @@ export class RegisterTheaterComponent {
     );
   }
 
-  private getCinemaId(): string{
+  private getCinemaId(): string {
     const cinemaData = localStorage.getItem('usuario');
-    if(cinemaData){
+    if (cinemaData) {
       const cinema = JSON.parse(cinemaData);
       return cinema.id;
     }
@@ -103,9 +102,10 @@ export class RegisterTheaterComponent {
         this.theaterService.createTheater(objeto).subscribe({
           next: (response) => {
             this.toastr.success('Sala registrada con éxito', 'Registro exitoso!');
-            this.closeModal(); 
             setTimeout(() => {
-              window.location.reload();
+              const cinemaId = this.getCinemaId();
+              this.getTheaters(cinemaId);
+              this.closeModal();
             }, 2000);
           },
           error: (error) => {
