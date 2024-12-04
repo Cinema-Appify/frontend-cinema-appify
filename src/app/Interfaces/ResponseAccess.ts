@@ -1,9 +1,12 @@
 export interface ResponseAccess {
     id: string,
-    username: string,
+    name: string,
+    firstName?: string,
+    lastName?: string,
     email: number,
+    state?: string,
     roles: string[],
-    accessToken: string,
+    token: string,
     tokenType: string,
     status: number
 }

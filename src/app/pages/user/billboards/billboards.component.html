@@ -1,0 +1,19 @@
+<div class="h-screen w-full flex flex-col">
+    <app-navbar />
+    <div class="flex-grow flex flex-col items-center justify-start">
+        <!-- <div class="text-center">
+            Utilizar elementos aqui adentro, no cambiar lo de fuera
+            <p>billboards works!</p>
+        </div> -->
+        <div class="grid grid-cols-4 gap-1">
+            <app-search-input class="col-span-2 mx-5"></app-search-input>
+            <app-general-select class="col-span-2 mx-5"></app-general-select>
+
+            <app-movie-card *ngFor="let movie of movies" [movieImg]="movie.photo" [titleMovie]="movie.name"
+                [cardType]="'actualMovie'" [duration]="movie.duration" [synopsis]="movie.synopsis"
+                [genres]="['Animación','Ciencia FIcción']">
+            </app-movie-card>
+        </div>
+        <app-chatbot class="fixed" />
+    </div>
+</div>

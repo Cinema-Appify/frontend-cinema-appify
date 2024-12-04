@@ -1,7 +1,12 @@
-export interface Usuario {
-    id: string,
-    username: string,
+import { Role } from "./Role";
+
+export interface User {
+    id: number,
     email: string,
-    password: string,
-    roles: string[]
+    name: string,
+    firstName: string,
+    lastName: string,
+    password?: string,
+    repeatPassword?: string,
+    roles?: Role[],
 }

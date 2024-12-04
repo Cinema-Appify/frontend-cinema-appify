@@ -1,0 +1,62 @@
+<div class="rounded-lg shadow-lg p-4" style="background-color: transparent;">
+  <table class="min-w-full bg-white border rounded-lg">
+    <!-- Encabezado de la tabla -->
+    <thead>
+      <tr class="bg-grayish-blue text-white">
+        <ng-container *ngFor="let col of columns">
+          <th class="p-2 text-center">{{ col.title }}</th>
+        </ng-container>
+        <th *ngIf="actions" class="p-2 text-center">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let item of data">
+        <tr class="border-b">
+          <ng-container *ngFor="let col of columns">
+            <td class="p-2 text-center bg-gray-100" [ngClass]="col.key === 'synopsis' ? 'max-w-52' : ''">
+              <ng-container [ngSwitch]="col.key">
+                <!-- Mostrar imagen si el campo es 'photo' -->
+                <ng-container *ngSwitchCase="'photo'">
+                  <img [src]="item[col.key]" alt="Imagen"
+                    class="w-48 h-48 object-cover mx-auto rounded-lg transition-transform duration-200 hover:scale-110" />
+                </ng-container>
+
+
+                <!-- Mostrar nombres de roles si el campo es 'roles' -->
+                <ng-container *ngSwitchCase="'roles'">
+                  {{ getRoleNames(item.roles) }}
+                </ng-container>
+
+                <!-- Mostrar texto normalmente para otros campos -->
+                <ng-container *ngSwitchDefault>
+                  <div *ngIf="col.key === 'synopsis'; else defaultContent" class="max-h-28 overflow-y-auto">
+                    {{ item[col.key] }}
+                  </div>
+                  <ng-template #defaultContent>
+                    {{ item[col.key] }}
+                  </ng-template>
+                </ng-container>
+
+              </ng-container>
+            </td>
+          </ng-container>
+
+
+          <td *ngIf="actions" class="p-2 text-center bg-gray-100">
+            <div class="flex justify-center space-x-2">
+              <button class="bg-yellow-500 text-white px-2 py-1 rounded-lg" (click)="editAction(item.name)"
+                title="Editar">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="bg-red-500 text-white px-2 py-1 rounded-lg" (click)="deleteAction(item.name)"
+                title="Eliminar">
+                <i class="fas fa-trash"></i>
+              </button>
+
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

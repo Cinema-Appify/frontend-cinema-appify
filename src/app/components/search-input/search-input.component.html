@@ -1,0 +1,9 @@
+<div class="relative rounded-md w-full">
+    <input placeholder="Busqueda" name="busqueda" type="text"
+        class="block rounded-md w-full py-2.5 pr-9 pl-5  placeholder-grayish-blue text-grayish-blue font-semibold border-solid border-2 border-grayish-blue"
+        (input)="onInput($event)" (blur)="onBlur()" [value]="value">
+
+    <div class="absolute inset-y-0 right-0 flex items-center">
+        <ng-icon name="heroMagnifyingGlass" class="cursor-pointer text-grayish-blue mr-3" style="font-size: 24px;" />
+    </div>
+</div>

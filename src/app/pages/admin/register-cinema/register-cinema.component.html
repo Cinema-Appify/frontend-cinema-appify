@@ -1,0 +1,79 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<div class="container mx-auto mt-20">
+
+    <div class="bg-grayish-blue text-white rounded-t-lg flex justify-between items-center px-6 py-3">
+
+        <h3 class="text-lg text-center flex-grow">Cines</h3>
+
+        <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 ml-auto" (click)="openModal()">
+            Añadir <i class="fas fa-plus ml-2"></i>
+        </button>
+
+    </div>
+
+    <app-general-table [columns]="columnNames" [data]="cinemas" [editAction]="editCinema"
+        [deleteAction]="deleteCinema"></app-general-table>
+
+</div>
+
+
+<!-- MOdal emergente -->
+<div *ngIf="isModalOpen"
+    class="fixed inset-0 bg-white bg-opacity-25 flex items-center justify-center transition-opacity duration-300 ease-in-out"
+    [ngClass]="{'backdrop-blur-sm': isModalOpen}">
+    <div class="bg-grayish-blue py-20 px-20 rounded-lg shadow-lg relative w-[48rem] my-auto transition-transform transform scale-95"
+        *ngIf="isModalOpen" [ngClass]="{'scale-100': isModalOpen}">
+        <button (click)="closeModal()" class="absolute top-2 right-4 text-white text-xl">
+            <i class="fas fa-times"></i>
+        </button>
+        <form class="space-y-4">
+            <div class="flex flex-col items-center mb-6">
+
+                <div class="flex flex-col items-center mb-6">
+                    <div class="flex items-center">
+                        <img [src]="imagePreview ? imagePreview : 'img/MiniLogo.png'" alt="Upload Icon"
+                            class="w-12 h-12 mr-4 object-cover rounded-full" />
+
+                        <label for="photo"
+                            class="w-80 bg-transparent text-white rounded-lg p-4 border-dashed border-2 border-white flex justify-center items-center cursor-pointer">
+                            Arrastre o seleccione su imagen
+                            <input id="photo" type="file" accept="image/*" (change)="onImageSelected($event)"
+                                class="hidden" />
+                        </label>
+                    </div>
+                </div>
+
+                <form class="space-y-3 flex flex-col items-center justify-center" [formGroup]="formSignUpCinema">
+                    <div class="flex flex-row">
+                        <div class="mt-2 w-auto">
+                            <app-general-input id="email" name="email" type="email" autocomplete="email"
+                                [required]="true" formControlName="email" placeholder="Correo electrónico" />
+                        </div>
+                        <div class="mt-2 w-auto ml-2">
+                            <app-general-input id="name" name="name" type="name" autocomplete="name" [required]="true"
+                                formControlName="name" placeholder="Nombre" />
+                        </div>
+                    </div>
+
+                    <div class="flex flex-row">
+                        <div class="w-auto">
+                            <app-general-input id="password" name="password" type="password" autocomplete="password"
+                                [required]="true" formControlName="password" placeholder="Contraseña" />
+                        </div>
+                        <div class="w-auto ml-2">
+                            <app-general-input id="repeatPassword" name="repeatPassword" type="password"
+                                autocomplete="repeatPassword" [required]="true" formControlName="repeatPassword"
+                                placeholder="Repetir Contraseña" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <app-general-button text="Registrar" color="bg-strong-red" colorHover="hover:bg-light-red"
+                            class="mt-2" (click)="signUpCinema()" />
+                    </div>
+                </form>
+            </div>
+        </form>
+    </div>
+</div>
